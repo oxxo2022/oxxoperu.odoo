@@ -1,0 +1,1 @@
+# oxxoperu.odoo
