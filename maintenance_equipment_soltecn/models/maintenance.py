@@ -10,10 +10,8 @@ class MaintenanceEquipment(models.Model):
         # "purchase_request.mail_template_13_1b96aef4"
         return res
     
-    # def button_approve(self, force=False):
-    #     res = super(PurchaseOrder, self).button_approve()
-    #     self.send_email_custom("purchase_request.email_template_purchase_order_soltecn")
-    #     return res
+    def button_approve(self):
+        return res
 
     def send_email_custom(self):
         
