@@ -32,4 +32,4 @@ class MaintenanceEquipment(models.Model):
             #                 'email_from': self.env.user.email}
             # template_id.send_mail(self.id, email_values=email_values, force_send=True)
             template_id.attachment_ids = [(3, data_id.id)]
-            return True
+        return True
