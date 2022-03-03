@@ -5,13 +5,7 @@ class MaintenanceEquipment(models.Model):
     _inherit = 'maintenance.equipment'
 
     def _enviar_reporte_activos(self):
-        res = super(PurchaseOrder, self).button_approve()
-        self.send_email_custom()
-        # "purchase_request.mail_template_13_1b96aef4"
-        return res
-    
-    def button_approve(self):
-        return res
+        return self.send_email_custom()
 
     def send_email_custom(self):
         
