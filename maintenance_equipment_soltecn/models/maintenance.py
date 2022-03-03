@@ -11,9 +11,9 @@ class MaintenanceEquipment(models.Model):
     @api.model
     def send_email_custom(self):
         template_id = self.env['mail.template'].search([('id', '=', 13)], limit=1).id
-        for maintenance in self:
-            maintenance.env['mail.template'].browse(template_id).send_mail(maintenance.id, force_send=True)
-            raise ValidationError("INGRESA")
+        # for maintenance in self:
+        maintenance.env['mail.template'].browse(template_id).send_mail(maintenance.id, force_send=True)
+        # raise ValidationError("INGRESA")
             # last_day_of_prev_month = date.today().replace(day=1) - timedelta(days=1)
             # start_day_of_prev_month = date.today().replace(day=1) - timedelta(days=last_day_of_prev_month.day)
             # maintenance_equipment_to_report = maintenance.search([('__last_update', '>=', start_day_of_prev_month),('__last_update', '<=', last_day_of_prev_month)])
