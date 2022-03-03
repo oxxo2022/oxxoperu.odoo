@@ -8,11 +8,10 @@ class MaintenanceEquipment(models.Model):
     def _enviar_reporte_activos(self):
         return self.send_email_custom()
 
-    @api.model
     def send_email_custom(self):
         template_id = self.env['mail.template'].search([('id', '=', 13)], limit=1).id
         # for maintenance in self:
-        maintenance.env['mail.template'].browse(template_id).send_mail(maintenance.id, force_send=True)
+        self.env['mail.template'].browse(template_id).send_mail(self.id, force_send=True)
         # raise ValidationError("INGRESA")
             # last_day_of_prev_month = date.today().replace(day=1) - timedelta(days=1)
             # start_day_of_prev_month = date.today().replace(day=1) - timedelta(days=last_day_of_prev_month.day)
