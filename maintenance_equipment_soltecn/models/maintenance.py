@@ -6,23 +6,25 @@ import base64
 class MaintenanceEquipment(models.Model):
     _inherit = 'maintenance.equipment'
 
+    x_studio_estado_name = fields.Char(related="x_studio_estado.name", string="Estado nombre")
+
     def _enviar_reporte_activos(self):
         return self.send_email_custom()
 
     @api.model
     def send_email_custom(self):
         template_id = self.env['mail.template'].search([('id', '=', 13)], limit=1)
-        last_day_of_prev_month = date.today().replace(day=1) - timedelta(days=1)
-        start_day_of_prev_month = date.today().replace(day=1) - timedelta(days=last_day_of_prev_month.day)
-        maintenance_equipment_to_report = self.env["maintenance.equipment"].search([('__last_update', '>=', start_day_of_prev_month),('__last_update', '<=', last_day_of_prev_month)])
-        # raise ValidationError(len(maintenance_equipment_to_report))
+        # last_day_of_prev_month = date.today().replace(day=1) - timedelta(days=1)
+        # start_day_of_prev_month = date.today().replace(day=1) - timedelta(days=last_day_of_prev_month.day)
+        maintenance_equipment_to_report = self.env["maintenance.equipment"].search([('x_studio_ubicacion_activo', '=', 'asignado'),('x_studio_estado_name', 'in', ('OS','TIENDA'))])
+        raise ValidationError(len(maintenance_equipment_to_report))
         # ('id', 'in', [1578, 1579, 1580, 1581, 1582])
         # ('__last_update', '>=', start_day_of_prev_month),('__last_update', '<=', last_day_of_prev_month)
 
         data, data_format = self.env.ref('studio_customization.equipo_de_mantenimie_b2fb437d-6e04-4ef9-a3b8-242087bd633f').sudo()._render_qweb_pdf(maintenance_equipment_to_report.ids)
         
         data_id = self.env['ir.attachment'].create({
-            'name': _("Reporte de activos (%s - %s).pdf" % (str(last_day_of_prev_month), str(start_day_of_prev_month))),
+            'name': _("Reporte de activos - %s.pdf" % str(date.today())),
             'type': 'binary',
             'datas': base64.encodebytes(data),
             'res_model': self._name,
