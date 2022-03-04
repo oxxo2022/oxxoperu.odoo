@@ -18,7 +18,7 @@ class MaintenanceEquipment(models.Model):
         maintenance_equipment_to_report = self.env["maintenance.equipment"].search([('__last_update', '>=', start_day_of_prev_month),('__last_update', '<=', last_day_of_prev_month)])
         docids = maintenance_equipment_to_report.ids
         docs = self.env['maintenance.equipment'].browse(docids)
-        raise ValidationError("texto")
+        
         docargs = {
            'doc_ids': docids,
            'doc_model': maintenance_equipment_to_report.model,
@@ -28,7 +28,7 @@ class MaintenanceEquipment(models.Model):
         
         # self.env['report'].render('module_name.report_name', docargs)
 
-        content = self.env.ref('studio_customization.studio_report_docume_8f3425e2-e80d-4aca-8c43-e8d80dfbe347')._render('studio_customization.studio_report_docume_8f3425e2-e80d-4aca-8c43-e8d80dfbe347',docargs)
+        content = self.env.ref('studio_customization.studio_report_docume_8f3425e2-e80d-4aca-8c43-e8d80dfbe347')._render(docargs)
 
         # data_id = self.env['ir.attachment'].create({
         #     'name': _("Reporte de activos (%s - %s).pdf", (str(last_day_of_prev_month), str(start_day_of_prev_month))),
