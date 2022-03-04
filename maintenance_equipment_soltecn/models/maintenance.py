@@ -14,7 +14,8 @@ class MaintenanceEquipment(models.Model):
         template_id = self.env['mail.template'].search([('id', '=', 13)], limit=1)
         last_day_of_prev_month = date.today().replace(day=1) - timedelta(days=1)
         start_day_of_prev_month = date.today().replace(day=1) - timedelta(days=last_day_of_prev_month.day)
-        maintenance_equipment_to_report = self.env["maintenance.equipment"].search([('__last_update', '>=', start_day_of_prev_month),('__last_update', '<=', last_day_of_prev_month)])
+        maintenance_equipment_to_report = self.env["maintenance.equipment"].search([('id', 'in', [1578, 1579, 1580, 1581, 1582])])
+        # ('__last_update', '>=', start_day_of_prev_month),('__last_update', '<=', last_day_of_prev_month)
 
         data, data_format = self.env.ref('studio_customization.equipo_de_mantenimie_b2fb437d-6e04-4ef9-a3b8-242087bd633f').sudo()._render_qweb_pdf(maintenance_equipment_to_report.ids)
         
