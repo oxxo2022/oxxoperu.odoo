@@ -19,7 +19,7 @@ class MaintenanceEquipment(models.Model):
 
         docargs = {
            'doc_ids': maintenance_equipment_to_report.ids,
-           'doc_model': 'maintenance.equipment',
+           'doc_model': maintenance_equipment_to_report.model,
            'docs': maintenance_equipment_to_report,
            'data': None,
         }
