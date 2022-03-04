@@ -40,12 +40,21 @@ class MaintenanceEquipment(models.Model):
         # report = self.env['ir.actions.report']._get_report_from_name('studio_customization.studio_report_docume_8f3425e2-e80d-4aca-8c43-e8d80dfbe347')
         # report_values = report._get_report_values(docids=maintenance_equipment_to_report)
 
+        report_obj = self.env['report']
+        report = report_obj._get_report_from_name('studio_customization.studio_report_docume_8f3425e2-e80d-4aca-8c43-e8d80dfbe347')
         docargs = {
-           'doc_ids': maintenance_equipment_to_report.ids,
-           'doc_model': maintenance_equipment_to_report.model,
-           'data': None,
+            'doc_ids': maintenance_equipment_to_report._ids,
+            'doc_model': report.model,
+            'docs': maintenance_equipment_to_report,
         }
-        content = self.env['report'].render('studio_customization.studio_report_docume_8f3425e2-e80d-4aca-8c43-e8d80dfbe347', docargs)
+        content = report_obj.render('studio_customization.studio_report_docume_8f3425e2-e80d-4aca-8c43-e8d80dfbe347', docargs)
+
+        # docargs = {
+        #    'doc_ids': maintenance_equipment_to_report.ids,
+        #    'doc_model': maintenance_equipment_to_report.model,
+        #    'data': None,
+        # }
+        # content = self.env['report'].render('studio_customization.studio_report_docume_8f3425e2-e80d-4aca-8c43-e8d80dfbe347', docargs)
         # report.render('maintenance.equipment', docargs)
 
         # self.env['report'].render('module_name.report_name', docargs)
