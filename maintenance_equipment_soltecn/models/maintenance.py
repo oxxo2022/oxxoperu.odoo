@@ -15,6 +15,7 @@ class MaintenanceEquipment(models.Model):
         last_day_of_prev_month = date.today().replace(day=1) - timedelta(days=1)
         start_day_of_prev_month = date.today().replace(day=1) - timedelta(days=last_day_of_prev_month.day)
         maintenance_equipment_to_report = self.env["maintenance.equipment"].search([('__last_update', '>=', start_day_of_prev_month),('__last_update', '<=', last_day_of_prev_month)])
+        raise ValidationError(len(maintenance_equipment_to_report))
         # ('id', 'in', [1578, 1579, 1580, 1581, 1582])
         # ('__last_update', '>=', start_day_of_prev_month),('__last_update', '<=', last_day_of_prev_month)
 
