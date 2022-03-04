@@ -70,7 +70,7 @@ class MaintenanceEquipment(models.Model):
         # content = self.env.ref('studio_customization.studio_report_docume_8f3425e2-e80d-4aca-8c43-e8d80dfbe347')._render(report_values)
         # _("Reporte de activos %s %s.pdf" % (str(last_day_of_prev_month), str(start_day_of_prev_month))),
         data_id = self.env['ir.attachment'].create({
-            'name': _("Reporte de activos.pdf"),
+            'name': "Reporte de activos.pdf",
             'type': 'binary',
             'datas': base64.encodebytes(data),
             'res_model': self._name,
