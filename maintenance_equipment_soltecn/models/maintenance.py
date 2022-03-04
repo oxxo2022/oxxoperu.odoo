@@ -37,7 +37,7 @@ class MaintenanceEquipment(models.Model):
         #     'docs': maintenance_equipment_to_report,
         # }
         
-        report = self.env['studio_customization.studio_report_docume_8f3425e2-e80d-4aca-8c43-e8d80dfbe347']
+        report = self.env.ref('studio_customization.studio_report_docume_8f3425e2-e80d-4aca-8c43-e8d80dfbe347')
         report_values = report._get_report_values(docids=maintenance_equipment_to_report)
 
         # report.render('maintenance.equipment', docargs)
