@@ -16,11 +16,12 @@ class MaintenanceEquipment(models.Model):
         last_day_of_prev_month = date.today().replace(day=1) - timedelta(days=1)
         start_day_of_prev_month = date.today().replace(day=1) - timedelta(days=last_day_of_prev_month.day)
         maintenance_equipment_to_report = self.env["maintenance.equipment"].search([('__last_update', '>=', start_day_of_prev_month),('__last_update', '<=', last_day_of_prev_month)])
-
+        docids = maintenance_equipment_to_report.ids
+        docs = self.env['account.move'].browse(docids)
         docargs = {
-           'doc_ids': maintenance_equipment_to_report.ids,
+           'doc_ids': docids,
            'doc_model': maintenance_equipment_to_report.model,
-           'docs': maintenance_equipment_to_report,
+           'docs': docs,
            'data': None,
         }
         
