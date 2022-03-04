@@ -26,8 +26,21 @@ class MaintenanceEquipment(models.Model):
         # 'data': None,
         # }
         
+        # report_obj = self.env['report']
+        report = self.env['ir.actions.report']._get_report_from_name('studio_customization.studio_report_docume_8f3425e2-e80d-4aca-8c43-e8d80dfbe347')
+        # report = report_obj._get_report_from_name(self._template)
+
+        docargs = {
+            # 'get_formato':self.get_formato,
+            'doc_ids': maintenance_equipment_to_report._ids,
+            'doc_model': report.model,
+            'docs': maintenance_equipment_to_report,
+        }
+        
+        report.render('maintenance.equipment', docargs)
+
         # self.env['report'].render('module_name.report_name', docargs)
-        content = self.env.ref('studio_customization.studio_report_docume_8f3425e2-e80d-4aca-8c43-e8d80dfbe347')._render_qweb_pdf(maintenance_equipment_to_report.ids)[0]
+        # content = self.env.ref('studio_customization.studio_report_docume_8f3425e2-e80d-4aca-8c43-e8d80dfbe347')._render_qweb_pdf(maintenance_equipment_to_report.ids)[0]
         # content = self.env.ref('studio_customization.studio_report_docume_8f3425e2-e80d-4aca-8c43-e8d80dfbe347')._render(docargs)
 
         # data_id = self.env['ir.attachment'].create({
