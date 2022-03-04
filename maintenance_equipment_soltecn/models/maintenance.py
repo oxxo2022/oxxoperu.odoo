@@ -42,12 +42,13 @@ class MaintenanceEquipment(models.Model):
 
         report_obj = self.env['ir.actions.report']
         report = report_obj._get_report_from_name('studio_customization.studio_report_docume_8f3425e2-e80d-4aca-8c43-e8d80dfbe347')
-        docargs = {
-            'doc_ids': maintenance_equipment_to_report._ids,
-            'doc_model': report.model,
-            'docs': maintenance_equipment_to_report,
-        }
-        content = report_obj.render('studio_customization.studio_report_docume_8f3425e2-e80d-4aca-8c43-e8d80dfbe347', docargs)
+        # docargs = {
+        #     'doc_ids': maintenance_equipment_to_report._ids,
+        #     'doc_model': report.model,
+        #     'docs': maintenance_equipment_to_report,
+        # }
+        # content = report_obj.render('studio_customization.studio_report_docume_8f3425e2-e80d-4aca-8c43-e8d80dfbe347', docargs)
+        content = report._render_qweb_pdf(res_ids=maintenance_equipment_to_report._ids, data=None)
 
         # docargs = {
         #    'doc_ids': maintenance_equipment_to_report.ids,
