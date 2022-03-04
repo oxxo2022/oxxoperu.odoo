@@ -6,7 +6,7 @@ import base64
 class MaintenanceEquipment(models.Model):
     _inherit = 'maintenance.equipment'
 
-    # x_studio_ubicacion_activo_name = fields.Char(related="x_studio_ubicacin_activo.name", string="Estado nombre")
+    x_studio_ubicacion_activo_name = fields.Char(related="x_studio_ubicacin_activo.x_name", string="Estado nombre")
 
     def _enviar_reporte_activos(self):
         return self.send_email_custom()
@@ -16,7 +16,7 @@ class MaintenanceEquipment(models.Model):
         template_id = self.env['mail.template'].search([('id', '=', 13)], limit=1)
         # last_day_of_prev_month = date.today().replace(day=1) - timedelta(days=1)
         # start_day_of_prev_month = date.today().replace(day=1) - timedelta(days=last_day_of_prev_month.day)
-        maintenance_equipment_to_report = self.env["maintenance.equipment"].search([('x_studio_estado_name', '=', 'asignado')])
+        maintenance_equipment_to_report = self.env["maintenance.equipment"].search([('x_studio_estado_name', '=', 'asignado'),('x_studio_ubicacion_activo_name', 'in', ('OS','TIENDA'))])
         # ,('x_studio_ubicacion_activo_name', 'in', ('OS','TIENDA'))
         raise ValidationError(len(maintenance_equipment_to_report))
         # ('id', 'in', [1578, 1579, 1580, 1581, 1582])
