@@ -18,8 +18,11 @@ class MaintenanceEquipment(models.Model):
         maintenance_equipment_to_report = self.env["maintenance.equipment"].search([('__last_update', '>=', start_day_of_prev_month),('__last_update', '<=', last_day_of_prev_month)])
         docids = maintenance_equipment_to_report.ids
         docs = self.env['maintenance.equipment'].browse(docids)
+        auxIds=[]
+        for item in docids:
+            auxIds.append(item.id)
         docargs = {
-           'doc_ids': docids,
+           'doc_ids': auxIds,
            'doc_model': maintenance_equipment_to_report.model,
            'docs': docs,
            'data': None,
