@@ -37,14 +37,20 @@ class MaintenanceEquipment(models.Model):
         #     'docs': maintenance_equipment_to_report,
         # }
         
-        report = self.env['ir.actions.report']._get_report_from_name('studio_customization.studio_report_docume_8f3425e2-e80d-4aca-8c43-e8d80dfbe347')
-        report_values = report._get_report_values(docids=maintenance_equipment_to_report)
+        # report = self.env['ir.actions.report']._get_report_from_name('studio_customization.studio_report_docume_8f3425e2-e80d-4aca-8c43-e8d80dfbe347')
+        # report_values = report._get_report_values(docids=maintenance_equipment_to_report)
 
+        docargs = {
+           'doc_ids': maintenance_equipment_to_report.ids,
+           'doc_model': maintenance_equipment_to_report.model,
+           'data': None,
+        }
+        content = self.env['report'].render('studio_customization.studio_report_docume_8f3425e2-e80d-4aca-8c43-e8d80dfbe347', docargs)
         # report.render('maintenance.equipment', docargs)
 
         # self.env['report'].render('module_name.report_name', docargs)
         # content = self.env.ref('studio_customization.studio_report_docume_8f3425e2-e80d-4aca-8c43-e8d80dfbe347')._render_qweb_pdf(maintenance_equipment_to_report.ids)[0]
-        content = self.env.ref('studio_customization.studio_report_docume_8f3425e2-e80d-4aca-8c43-e8d80dfbe347')._render(report_values)
+        # content = self.env.ref('studio_customization.studio_report_docume_8f3425e2-e80d-4aca-8c43-e8d80dfbe347')._render(report_values)
 
         # data_id = self.env['ir.attachment'].create({
         #     'name': _("Reporte de activos (%s - %s).pdf", (str(last_day_of_prev_month), str(start_day_of_prev_month))),
