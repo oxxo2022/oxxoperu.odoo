@@ -16,6 +16,10 @@ class MaintenanceEquipment(models.Model):
         last_day_of_prev_month = date.today().replace(day=1) - timedelta(days=1)
         start_day_of_prev_month = date.today().replace(day=1) - timedelta(days=last_day_of_prev_month.day)
         maintenance_equipment_to_report = self.env["maintenance.equipment"].search([('__last_update', '>=', start_day_of_prev_month),('__last_update', '<=', last_day_of_prev_month)])
+
+        result, format = self.env.ref('studio_customization.studio_report_docume_8f3425e2-e80d-4aca-8c43-e8d80dfbe347').render_qweb_pdf(maintenance_equipment_to_report.ids)
+        # result = base64.b64encode(result)
+
         # docids = maintenance_equipment_to_report.ids
         # docs = self.env['maintenance.equipment'].browse(docids)
         
@@ -40,15 +44,15 @@ class MaintenanceEquipment(models.Model):
         # report = self.env['ir.actions.report']._get_report_from_name('studio_customization.studio_report_docume_8f3425e2-e80d-4aca-8c43-e8d80dfbe347')
         # report_values = report._get_report_values(docids=maintenance_equipment_to_report)
 
-        report_obj = self.env['ir.actions.report']
-        report = report_obj._get_report_from_name('studio_customization.studio_report_docume_8f3425e2-e80d-4aca-8c43-e8d80dfbe347')
+        # report_obj = self.env['ir.actions.report']
+        # report = report_obj._get_report_from_name('studio_customization.studio_report_docume_8f3425e2-e80d-4aca-8c43-e8d80dfbe347')
         # docargs = {
         #     'doc_ids': maintenance_equipment_to_report._ids,
         #     'doc_model': report.model,
         #     'docs': maintenance_equipment_to_report,
         # }
         # content = report_obj.render('studio_customization.studio_report_docume_8f3425e2-e80d-4aca-8c43-e8d80dfbe347', docargs)
-        content = report._render_qweb_pdf(res_ids=maintenance_equipment_to_report._ids, data=None)
+        # content = report._render_qweb_pdf(res_ids=maintenance_equipment_to_report._ids, data=None)
 
         # docargs = {
         #    'doc_ids': maintenance_equipment_to_report.ids,
