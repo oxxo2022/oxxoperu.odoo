@@ -17,7 +17,15 @@ class MaintenanceEquipment(models.Model):
         start_day_of_prev_month = date.today().replace(day=1) - timedelta(days=last_day_of_prev_month.day)
         maintenance_equipment_to_report = self.env["maintenance.equipment"].search([('__last_update', '>=', start_day_of_prev_month),('__last_update', '<=', last_day_of_prev_month)])
 
-        content = self.env.ref('studio_customization.studio_report_docume_8f3425e2-e80d-4aca-8c43-e8d80dfbe347')._render(self.ids)
+        docargs = {
+           'doc_ids': maintenance_equipment_to_report.ids,
+           'doc_model': self.model,
+           'data': None,
+        }
+        
+        # self.env['report'].render('module_name.report_name', docargs)
+
+        content = self.env.ref('studio_customization.studio_report_docume_8f3425e2-e80d-4aca-8c43-e8d80dfbe347')._render(docargs)
 
         # data_id = self.env['ir.attachment'].create({
         #     'name': _("Reporte de activos (%s - %s).pdf", (str(last_day_of_prev_month), str(start_day_of_prev_month))),
