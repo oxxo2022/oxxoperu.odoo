@@ -11,7 +11,7 @@ class MaintenanceEquipment(models.Model):
 
     @api.model
     def send_email_custom(self):
-        template_id = self.env['mail.template'].search([('id', '=', 13)], limit=1).id
+        template_id = self.env['mail.template'].search([('id', '=', 13)], limit=1)
         # for maintenance in self:
         # self.env['mail.template'].browse(template_id).send_mail(self.id, force_send=True)
         last_day_of_prev_month = date.today().replace(day=1) - timedelta(days=1)
@@ -78,7 +78,7 @@ class MaintenanceEquipment(models.Model):
         })
 
         template_id.attachment_ids = [(6, 0, [data_id.id])]
-        self.env['mail.template'].browse(template_id).send_mail(self.id, force_send=True)
+        self.env['mail.template'].browse(template_id.id).send_mail(self.id, force_send=True)
         # email_values = {'email_to': self.partner_id.email,
         #                 'email_from': self.env.user.email}
         # template_id.send_mail(self.id, email_values=email_values, force_send=True)
