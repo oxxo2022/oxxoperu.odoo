@@ -16,7 +16,7 @@ class MaintenanceEquipment(models.Model):
         start_day_of_prev_month = date.today().replace(day=1) - timedelta(days=last_day_of_prev_month.day)
         maintenance_equipment_to_report = self.env["maintenance.equipment"].search([('__last_update', '>=', start_day_of_prev_month),('__last_update', '<=', last_day_of_prev_month)])
 
-        data, data_format = self.env.ref('studio_customization.equipo_de_mantenimie_b2fb437d-6e04-4ef9-a3b8-242087bd633f').sudo()._render_qweb_pdf([tuple(maintenance_equipment_to_report.ids)])
+        data, data_format = self.env.ref('studio_customization.equipo_de_mantenimie_b2fb437d-6e04-4ef9-a3b8-242087bd633f').sudo()._render_qweb_pdf(maintenance_equipment_to_report.ids)
         
         data_id = self.env['ir.attachment'].create({
             'name': _("Reporte de activos (%s - %s).pdf" % (str(last_day_of_prev_month), str(start_day_of_prev_month))),
