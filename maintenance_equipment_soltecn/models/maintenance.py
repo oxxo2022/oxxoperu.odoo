@@ -27,7 +27,7 @@ class MaintenanceEquipment(models.Model):
         # }
         
         # self.env['report'].render('module_name.report_name', docargs)
-        content = self.env.ref('l10n_ch.l10n_ch_isr_report')._render_qweb_pdf(maintenance_equipment_to_report.ids)[0]
+        content = self.env.ref('studio_customization.studio_report_docume_8f3425e2-e80d-4aca-8c43-e8d80dfbe347')._render_qweb_pdf(maintenance_equipment_to_report.ids)[0]
         # content = self.env.ref('studio_customization.studio_report_docume_8f3425e2-e80d-4aca-8c43-e8d80dfbe347')._render(docargs)
 
         # data_id = self.env['ir.attachment'].create({
