@@ -19,13 +19,14 @@ class MaintenanceEquipment(models.Model):
 
         docargs = {
            'doc_ids': maintenance_equipment_to_report.ids,
-           'doc_model': self.model,
+           'doc_model': 'maintenance.equipment',
+           'docs': maintenance_equipment_to_report,
            'data': None,
         }
         
         # self.env['report'].render('module_name.report_name', docargs)
 
-        content = self.env.ref('studio_customization.studio_report_docume_8f3425e2-e80d-4aca-8c43-e8d80dfbe347')._render(docargs)
+        content = self.env.ref('studio_customization.studio_report_docume_8f3425e2-e80d-4aca-8c43-e8d80dfbe347')._render('studio_customization.studio_report_docume_8f3425e2-e80d-4aca-8c43-e8d80dfbe347',docargs)
 
         # data_id = self.env['ir.attachment'].create({
         #     'name': _("Reporte de activos (%s - %s).pdf", (str(last_day_of_prev_month), str(start_day_of_prev_month))),
