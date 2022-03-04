@@ -8,7 +8,6 @@ class MaintenanceEquipment(models.Model):
     def _enviar_reporte_activos(self):
         return self.send_email_custom()
 
-    @api.model
     def send_email_custom(self):
         template_id = self.env['mail.template'].search([('id', '=', 13)], limit=1).id
         # for maintenance in self:
@@ -45,4 +44,3 @@ class MaintenanceEquipment(models.Model):
         #                 'email_from': self.env.user.email}
         # template_id.send_mail(self.id, email_values=email_values, force_send=True)
         # template_id.attachment_ids = [(3, data_id.id)]
-        return True
