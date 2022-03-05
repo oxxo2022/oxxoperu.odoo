@@ -14,14 +14,7 @@ class MaintenanceEquipment(models.Model):
     @api.model
     def send_email_custom(self):
         template_id = self.env['mail.template'].search([('id', '=', 13)], limit=1)
-        # last_day_of_prev_month = date.today().replace(day=1) - timedelta(days=1)
-        # start_day_of_prev_month = date.today().replace(day=1) - timedelta(days=last_day_of_prev_month.day)
         maintenance_equipment_to_report = self.env["maintenance.equipment"].search([('x_studio_estado', '=', 'Asignado'),('x_studio_ubicacion_activo_name', 'in', ('OS','TIENDA'))])
-        # ,('x_studio_ubicacion_activo_name', 'in', ('OS','TIENDA'))
-        raise ValidationError(len(maintenance_equipment_to_report))
-        # ('id', 'in', [1578, 1579, 1580, 1581, 1582])
-        # ('__last_update', '>=', start_day_of_prev_month),('__last_update', '<=', last_day_of_prev_month)
-
         data, data_format = self.env.ref('studio_customization.equipo_de_mantenimie_b2fb437d-6e04-4ef9-a3b8-242087bd633f').sudo()._render_qweb_pdf(maintenance_equipment_to_report.ids)
         
         data_id = self.env['ir.attachment'].create({
@@ -35,6 +28,15 @@ class MaintenanceEquipment(models.Model):
         template_id.attachment_ids = [(6, 0, [data_id.id])]
         self.env['mail.template'].browse(template_id.id).send_mail(self.id, force_send=True)
         template_id.attachment_ids = [(3, data_id.id)]
+        # last_day_of_prev_month = date.today().replace(day=1) - timedelta(days=1)
+        # start_day_of_prev_month = date.today().replace(day=1) - timedelta(days=last_day_of_prev_month.day)
+        # maintenance_equipment_to_report = self.env["maintenance.equipment"].search([('x_studio_estado', '=', 'Asignado'),('x_studio_ubicacion_activo_name', 'in', ('OS','TIENDA'))])
+        # ,('x_studio_ubicacion_activo_name', 'in', ('OS','TIENDA'))
+        # raise ValidationError(len(maintenance_equipment_to_report))
+        # ('id', 'in', [1578, 1579, 1580, 1581, 1582])
+        # ('__last_update', '>=', start_day_of_prev_month),('__last_update', '<=', last_day_of_prev_month)
+
+        
 
         # for maintenance in self:
         # self.env['mail.template'].browse(template_id).send_mail(self.id, force_send=True)
