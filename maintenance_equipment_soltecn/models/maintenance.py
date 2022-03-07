@@ -11,6 +11,7 @@ class MaintenanceEquipment(models.Model):
     def _enviar_reporte_activos(self):
         return self.send_email_custom()
 
+    # METODO
     @api.model
     def send_email_custom(self):
         template_id = self.env['mail.template'].search([('id', '=', 13)], limit=1)
