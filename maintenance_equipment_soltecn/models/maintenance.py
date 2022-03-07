@@ -11,13 +11,12 @@ class MaintenanceEquipment(models.Model):
     def _enviar_reporte_activos(self):
         return self.send_email_custom()
 
-    # ENVIO CORREO
     @api.model
     def send_email_custom(self):
         template_id = self.env['mail.template'].search([('id', '=', 13)], limit=1)
         maintenance_equipment_to_report = self.env["maintenance.equipment"].search([('x_studio_estado', '=', 'Asignado'),('x_studio_ubicacion_activo_name', 'in', ('OS','TIENDA'))])
-        data, data_format = self.env.ref('studio_customization.equipo_de_mantenimie_cb3a8232-5362-4b87-8934-a9e4ff6486fd').sudo()._render_qweb_pdf(maintenance_equipment_to_report.ids)
-
+        data, data_format = self.env.ref('studio_customization.equipo_de_mantenimie_b2fb437d-6e04-4ef9-a3b8-242087bd633f').sudo()._render_qweb_pdf(maintenance_equipment_to_report.ids)
+        
         data_id = self.env['ir.attachment'].create({
             'name': _("Reporte de activos - %s.pdf" % str(date.today())),
             'type': 'binary',
