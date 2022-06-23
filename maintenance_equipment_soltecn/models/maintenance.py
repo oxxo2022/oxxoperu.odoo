@@ -16,9 +16,8 @@ class MaintenanceEquipment(models.Model):
     def send_email_custom(self):
         template_id = self.env['mail.template'].search([('id', '=', 13)], limit=1)
         maintenance_equipment_to_report = self.env["maintenance.equipment"].search([('x_studio_estado', '=', 'Asignado'),('x_studio_ubicacion_activo_name', 'in', ('OS','TIENDA'))])
-        raise ValidationError(maintenance_equipment_to_report)
         data, data_format = self.env.ref('studio_customization.equipo_de_mantenimie_cb3a8232-5362-4b87-8934-a9e4ff6486fd').sudo()._render_qweb_pdf(maintenance_equipment_to_report.ids)
-
+        raise ValidationError(data)
         data_id = self.env['ir.attachment'].create({
             'name': _("Reporte de activos - %s.pdf" % str(date.today())),
             'type': 'binary',
