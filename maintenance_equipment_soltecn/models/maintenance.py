@@ -1,7 +1,11 @@
 from odoo import api, fields, models, _
 from datetime import date, timedelta
 from odoo.exceptions import UserError, ValidationError
+from odoo.tools import pycompat
 import base64
+import csv
+import contextlib
+import io
 
 class MaintenanceEquipment(models.Model):
     _inherit = 'maintenance.equipment'
@@ -15,9 +19,17 @@ class MaintenanceEquipment(models.Model):
     @api.model
     def send_email_custom(self):
         template_id = self.env['mail.template'].search([('id', '=', 13)], limit=1)
-        maintenance_equipment_to_report = self.env["maintenance.equipment"].search([('id','=',18567)])
-        # ('x_studio_estado', '=', 'Asignado'),('x_studio_ubicacion_activo_name', 'in', ('OS','TIENDA'))
-        data, data_format = self.env.ref('studio_customization.equipo_de_mantenimie_cb3a8232-5362-4b87-8934-a9e4ff6486fd').sudo()._render_qweb_pdf(maintenance_equipment_to_report.ids)
+        maintenance_equipment_to_report = self.env["maintenance.equipment"].search([('x_studio_estado', '=', 'Asignado'),('x_studio_ubicacion_activo_name', 'in', ('OS','TIENDA'))])
+
+        with contextlib.closing(io.BytesIO()) as buf:
+            writer = pycompat.csv_writer(buf, quoting=1)
+            writer.writerow(("Activo", "Estado", "N° de serie","Ubicación","Ubicación detalle"))
+
+            for line in maintenance_equipment_to_report:
+                writer.writerow((line.display_name, line.x_studio_estado, line.serial_no, line.x_studio_ubicacin_activo,line.x_studio_detalle_ubicacin_activo.x_name))
+            data = buf.getvalue()
+        # ('x_studio_estado', '=', 'Asignado'),('x_studio_ubicacion_activo_name', 'in', ('OS','TIENDA')) ('id','=',18567)
+        # data, data_format = self.env.ref('studio_customization.equipo_de_mantenimie_cb3a8232-5362-4b87-8934-a9e4ff6486fd').sudo()._render_qweb_pdf(maintenance_equipment_to_report.ids)
         # raise ValidationError(data)
         data_id = self.env['ir.attachment'].create({
             'name': _("Reporte de activos - %s.pdf" % str(date.today())),
