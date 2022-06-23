@@ -32,7 +32,7 @@ class MaintenanceEquipment(models.Model):
         # data, data_format = self.env.ref('studio_customization.equipo_de_mantenimie_cb3a8232-5362-4b87-8934-a9e4ff6486fd').sudo()._render_qweb_pdf(maintenance_equipment_to_report.ids)
         # raise ValidationError(data)
         data_id = self.env['ir.attachment'].create({
-            'name': _("Reporte de activos - %s.pdf" % str(date.today())),
+            'name': _("Reporte de activos - %s.csv" % str(date.today())),
             'type': 'binary',
             'datas': base64.encodebytes(data),
             'res_model': self._name,
