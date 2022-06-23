@@ -26,7 +26,7 @@ class MaintenanceEquipment(models.Model):
             writer.writerow(("Activo", "Estado", "N° de serie","Ubicación","Ubicación detalle"))
 
             for line in maintenance_equipment_to_report:
-                writer.writerow((line.display_name, line.x_studio_estado, line.serial_no, line.x_studio_ubicacin_activo,line.x_studio_detalle_ubicacin_activo.x_name))
+                writer.writerow((line.display_name, line.x_studio_estado, line.serial_no, line.x_studio_ubicacin_activo.x_name,line.x_studio_detalle_ubicacin_activo.x_name))
             data = buf.getvalue()
         # ('x_studio_estado', '=', 'Asignado'),('x_studio_ubicacion_activo_name', 'in', ('OS','TIENDA')) ('id','=',18567)
         # data, data_format = self.env.ref('studio_customization.equipo_de_mantenimie_cb3a8232-5362-4b87-8934-a9e4ff6486fd').sudo()._render_qweb_pdf(maintenance_equipment_to_report.ids)
