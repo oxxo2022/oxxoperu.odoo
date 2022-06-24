@@ -22,7 +22,7 @@ class MaintenanceEquipment(models.Model):
         maintenance_equipment_to_report = self.env["maintenance.equipment"].search([('x_studio_estado', '=', 'Asignado'),('x_studio_ubicacion_activo_name', 'in', ('OS','TIENDA'))])
 
         with contextlib.closing(io.BytesIO()) as buf:
-            writer = pycompat.csv_writer(buf, quoting=1, dialect='excel', encoding='utf-8')
+            writer = pycompat.csv_writer(buf, quoting=1, dialect='excel')
             writer.writerow(("Activo", "Estado", "N° de serie","Ubicación","Ubicación detalle"))
 
             for line in maintenance_equipment_to_report:
