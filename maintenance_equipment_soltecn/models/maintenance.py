@@ -6,7 +6,7 @@ import base64
 import csv
 import contextlib
 import io
-
+from odoo.tools.misc import xlsxwriter
 class MaintenanceEquipment(models.Model):
     _inherit = 'maintenance.equipment'
 
@@ -21,18 +21,50 @@ class MaintenanceEquipment(models.Model):
         template_id = self.env['mail.template'].search([('id', '=', 13)], limit=1)
         maintenance_equipment_to_report = self.env["maintenance.equipment"].search([('x_studio_estado', '=', 'Asignado'),('x_studio_ubicacion_activo_name', 'in', ('OS','TIENDA'))])
 
-        with contextlib.closing(io.BytesIO()) as buf:
-            writer = pycompat.csv_writer(buf, quoting=1)
-            writer.writerow(("Activo", "Estado", "N° de serie","Ubicación","Ubicación detalle"))
+        output = io.BytesIO()
+        workbook = xlsxwriter.Workbook(output, {'in_memory': True})
+        worksheet = workbook.add_worksheet(_("Reporte de activos - %s" % str(date.today())))
+        style_highlight = workbook.add_format({'bold': True, 'pattern': 1, 'bg_color': '#E0E0E0', 'align': 'center'})
+        style_normal = workbook.add_format({'align': 'center'})
+        row = 0
 
-            for line in maintenance_equipment_to_report:
-                writer.writerow((line.display_name, line.x_studio_estado, line.serial_no, line.x_studio_ubicacin_activo.x_name,line.x_studio_detalle_ubicacin_activo.x_name))
-            data = buf.getvalue()
-        # ('x_studio_estado', '=', 'Asignado'),('x_studio_ubicacion_activo_name', 'in', ('OS','TIENDA')) ('id','=',18567)
-        # data, data_format = self.env.ref('studio_customization.equipo_de_mantenimie_cb3a8232-5362-4b87-8934-a9e4ff6486fd').sudo()._render_qweb_pdf(maintenance_equipment_to_report.ids)
-        # raise ValidationError(data)
+        headers = [
+            "Activo",
+            "Estado",
+            "N° de serie",
+            "Ubicación",
+            "Ubicación detalle",
+        ]
+
+        rows = []
+        for line in maintenance_equipment_to_report:
+            rows.append((
+                line.display_name,
+                line.x_studio_estado,
+                line.serial_no,
+                line.x_studio_ubicacin_activo.x_name,
+                line.x_studio_detalle_ubicacin_activo.x_name
+            ))
+
+        col = 0
+        for header in headers:
+            worksheet.write(row, col, header, style_highlight)
+            worksheet.set_column(col, col, 30)
+            col += 1
+
+        row = 1
+        for employee_row in rows:
+            col = 0
+            for employee_data in employee_row:
+                worksheet.write(row, col, employee_data, style_normal)
+                col += 1
+            row += 1
+
+        workbook.close()
+        data = output.getvalue()
+
         data_id = self.env['ir.attachment'].create({
-            'name': _("Reporte de activos - %s.csv" % str(date.today())),
+            'name': _("Reporte de activos - %s.xlsx" % str(date.today())),
             'type': 'binary',
             'datas': base64.encodebytes(data),
             'res_model': self._name,
@@ -42,68 +74,3 @@ class MaintenanceEquipment(models.Model):
         template_id.attachment_ids = [(6, 0, [data_id.id])]
         self.env['mail.template'].browse(template_id.id).send_mail(self.id, force_send=True)
         template_id.attachment_ids = [(3, data_id.id)]
-        # last_day_of_prev_month = date.today().replace(day=1) - timedelta(days=1)
-        # start_day_of_prev_month = date.today().replace(day=1) - timedelta(days=last_day_of_prev_month.day)
-        # maintenance_equipment_to_report = self.env["maintenance.equipment"].search([('x_studio_estado', '=', 'Asignado'),('x_studio_ubicacion_activo_name', 'in', ('OS','TIENDA'))])
-        # ,('x_studio_ubicacion_activo_name', 'in', ('OS','TIENDA'))
-        # raise ValidationError(len(maintenance_equipment_to_report))
-        # ('id', 'in', [1578, 1579, 1580, 1581, 1582])
-        # ('__last_update', '>=', start_day_of_prev_month),('__last_update', '<=', last_day_of_prev_month)
-
-        
-
-        # for maintenance in self:
-        # self.env['mail.template'].browse(template_id).send_mail(self.id, force_send=True)
-                # data, data_format = self.env.ref('studio_customization.studio_report_docume_8f3425e2-e80d-4aca-8c43-e8d80dfbe347').sudo()._render_qweb_pdf(maintenance_equipment_to_report.ids)
-        # result = base64.b64encode(result)
-
-        # docids = maintenance_equipment_to_report.ids
-        # docs = self.env['maintenance.equipment'].browse(docids)
-        
-        # docargs = {
-        # 'doc_ids': docids,
-        # 'doc_model': maintenance_equipment_to_report.model,
-        # 'docs': docs,
-        # 'data': None,
-        # }
-        
-        # report_obj = self.env['report']
-        # report = self.env['ir.actions.report']._get_report_from_name('studio_customization.studio_report_docume_8f3425e2-e80d-4aca-8c43-e8d80dfbe347')
-        # report = report_obj._get_report_from_name(self._template)
-
-        # docargs = {
-        #     # 'get_formato':self.get_formato,
-        #     'doc_ids': maintenance_equipment_to_report._ids,
-        #     'doc_model': report.model,
-        #     'docs': maintenance_equipment_to_report,
-        # }
-        
-        # report = self.env['ir.actions.report']._get_report_from_name('studio_customization.studio_report_docume_8f3425e2-e80d-4aca-8c43-e8d80dfbe347')
-        # report_values = report._get_report_values(docids=maintenance_equipment_to_report)
-
-        # report_obj = self.env['ir.actions.report']
-        # report = report_obj._get_report_from_name('studio_customization.studio_report_docume_8f3425e2-e80d-4aca-8c43-e8d80dfbe347')
-        # docargs = {
-        #     'doc_ids': maintenance_equipment_to_report._ids,
-        #     'doc_model': report.model,
-        #     'docs': maintenance_equipment_to_report,
-        # }
-        # content = report_obj.render('studio_customization.studio_report_docume_8f3425e2-e80d-4aca-8c43-e8d80dfbe347', docargs)
-        # content = report._render_qweb_pdf(res_ids=maintenance_equipment_to_report._ids, data=None)
-
-        # docargs = {
-        #    'doc_ids': maintenance_equipment_to_report.ids,
-        #    'doc_model': maintenance_equipment_to_report.model,
-        #    'data': None,
-        # }
-        # content = self.env['report'].render('studio_customization.studio_report_docume_8f3425e2-e80d-4aca-8c43-e8d80dfbe347', docargs)
-        # report.render('maintenance.equipment', docargs)
-
-        # self.env['report'].render('module_name.report_name', docargs)
-        # content = self.env.ref('studio_customization.studio_report_docume_8f3425e2-e80d-4aca-8c43-e8d80dfbe347')._render_qweb_pdf(maintenance_equipment_to_report.ids)[0]
-        # content = self.env.ref('studio_customization.studio_report_docume_8f3425e2-e80d-4aca-8c43-e8d80dfbe347')._render(report_values)
-        # _("Reporte de activos %s %s.pdf" % (str(last_day_of_prev_month), str(start_day_of_prev_month))),
-
-                # email_values = {'email_to': self.partner_id.email,
-        #                 'email_from': self.env.user.email}
-        # template_id.send_mail(self.id, email_values=email_values, force_send=True)
