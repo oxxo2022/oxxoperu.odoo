@@ -23,7 +23,7 @@ class MaintenanceEquipment(models.Model):
 
         with contextlib.closing(io.BytesIO()) as buf:
             writer = pycompat.csv_writer(buf, quoting=1)
-            writer.writerow(("Activo", "Estado", "N° de serie","Ubicación","Ubicación detalle"))
+            writer.writerow(("Activo", "Estado", ("N° de serie").encode('utf-8'),("Ubicación").encode('utf-8'),("Ubicación detalle").encode('utf-8')))
 
             for line in maintenance_equipment_to_report:
                 writer.writerow((line.display_name, line.x_studio_estado, line.serial_no, line.x_studio_ubicacin_activo.x_name,line.x_studio_detalle_ubicacin_activo.x_name))
@@ -34,7 +34,7 @@ class MaintenanceEquipment(models.Model):
         data_id = self.env['ir.attachment'].create({
             'name': _("Reporte de activos - %s.csv" % str(date.today())),
             'type': 'binary',
-            'datas': base64.encodebytes(data).encode('utf-8'),
+            'datas': base64.encodebytes(data),
             'res_model': self._name,
             'res_id': self.id
         })
