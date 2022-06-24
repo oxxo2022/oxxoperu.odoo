@@ -6,7 +6,7 @@ import base64
 import csv
 import contextlib
 import io
-
+from odoo.tools.misc import xlsxwriter
 class MaintenanceEquipment(models.Model):
     _inherit = 'maintenance.equipment'
 
@@ -21,13 +21,61 @@ class MaintenanceEquipment(models.Model):
         template_id = self.env['mail.template'].search([('id', '=', 13)], limit=1)
         maintenance_equipment_to_report = self.env["maintenance.equipment"].search([('x_studio_estado', '=', 'Asignado'),('x_studio_ubicacion_activo_name', 'in', ('OS','TIENDA'))])
 
-        with contextlib.closing(io.BytesIO()) as buf:
-            writer = pycompat.csv_writer(buf)
-            writer.writerow(("Activo", "Estado", "N° de serie","Ubicación","Ubicación detalle"))
+        # with contextlib.closing(io.BytesIO()) as buf:
+        #     writer = pycompat.csv_writer(buf)
+        #     writer.writerow(("Activo", "Estado", "N° de serie","Ubicación","Ubicación detalle"))
 
-            for line in maintenance_equipment_to_report:
-                writer.writerow((line.display_name, line.x_studio_estado, line.serial_no, line.x_studio_ubicacin_activo.x_name,line.x_studio_detalle_ubicacin_activo.x_name))
-            data = buf.getvalue()
+        #     for line in maintenance_equipment_to_report:
+        #         writer.writerow((line.display_name, line.x_studio_estado, line.serial_no, line.x_studio_ubicacin_activo.x_name,line.x_studio_detalle_ubicacin_activo.x_name))
+        #     data = buf.getvalue()
+        # ************************
+        output = io.BytesIO()
+        workbook = xlsxwriter.Workbook(output, {'in_memory': True})
+        worksheet = workbook.add_worksheet(_("Reporte de activos - %s.csv" % str(date.today())))
+        style_highlight = workbook.add_format({'bold': True, 'pattern': 1, 'bg_color': '#E0E0E0', 'align': 'center'})
+        style_normal = workbook.add_format({'align': 'center'})
+        row = 0
+
+        headers = [
+            "Activo",
+            "Estado",
+            "N° de serie",
+            "Ubicación",
+            "Ubicación detalle",
+        ]
+
+        # certificate_selection_vals = {
+        #     elem[0]: elem[1] for elem in self.env['hr.employee']._fields['certificate']._description_selection(self.env)
+        # }
+
+        rows = []
+        for line in maintenance_equipment_to_report:
+            # employee = line.employee_id.sudo()
+            rows.append((
+                line.display_name,
+                line.x_studio_estado,
+                line.serial_no,
+                line.x_studio_ubicacin_activo.x_name,
+                line.x_studio_detalle_ubicacin_activo.x_name
+            ))
+
+        col = 0
+        for header in headers:
+            worksheet.write(row, col, header, style_highlight)
+            worksheet.set_column(col, col, 30)
+            col += 1
+
+        row = 1
+        for employee_row in rows:
+            col = 0
+            for employee_data in employee_row:
+                worksheet.write(row, col, employee_data, style_normal)
+                col += 1
+            row += 1
+
+        workbook.close()
+        data = output.getvalue()
+        # ************************
         # ('x_studio_estado', '=', 'Asignado'),('x_studio_ubicacion_activo_name', 'in', ('OS','TIENDA')) ('id','=',18567)
         # data, data_format = self.env.ref('studio_customization.equipo_de_mantenimie_cb3a8232-5362-4b87-8934-a9e4ff6486fd').sudo()._render_qweb_pdf(maintenance_equipment_to_report.ids)
         # raise ValidationError(data)
