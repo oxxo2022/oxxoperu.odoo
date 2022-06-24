@@ -31,7 +31,7 @@ class MaintenanceEquipment(models.Model):
         # ************************
         output = io.BytesIO()
         workbook = xlsxwriter.Workbook(output, {'in_memory': True})
-        worksheet = workbook.add_worksheet(_("Reporte de activos - %s.csv" % str(date.today())))
+        worksheet = workbook.add_worksheet(_("Reporte de activos - %s" % str(date.today())))
         style_highlight = workbook.add_format({'bold': True, 'pattern': 1, 'bg_color': '#E0E0E0', 'align': 'center'})
         style_normal = workbook.add_format({'align': 'center'})
         row = 0
@@ -80,7 +80,7 @@ class MaintenanceEquipment(models.Model):
         # data, data_format = self.env.ref('studio_customization.equipo_de_mantenimie_cb3a8232-5362-4b87-8934-a9e4ff6486fd').sudo()._render_qweb_pdf(maintenance_equipment_to_report.ids)
         # raise ValidationError(data)
         data_id = self.env['ir.attachment'].create({
-            'name': _("Reporte de activos - %s.csv" % str(date.today())),
+            'name': _("Reporte de activos - %s.xlsx" % str(date.today())),
             'type': 'binary',
             'datas': base64.encodebytes(data),
             'res_model': self._name,
