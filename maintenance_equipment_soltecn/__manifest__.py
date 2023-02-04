@@ -1,0 +1,15 @@
+{
+    'name': 'Maintenance Soltecn',
+    'version': '1.0',
+    'summary': 'Custom maintenance',
+    'category': 'Maintenance',
+    'author': 'Soltecn',
+    'maintainer': 'Soltecn',
+    'company': 'Soltecn',
+    'website': 'https://www.Soltecn.com',
+    'depends': ['maintenance'],
+    'qweb': [],
+    'data': [],
+    'installable': True,
+    'license': 'AGPL-3',
+}
