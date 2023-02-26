@@ -1,6 +1,6 @@
 {
     'name': 'Maintenance Soltecn',
-    'version': '1.0',
+    'version': '16.0',
     'summary': 'Custom maintenance',
     'category': 'Maintenance',
     'author': 'Soltecn',
