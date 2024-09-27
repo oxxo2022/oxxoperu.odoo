@@ -10,6 +10,7 @@ from odoo.tools.misc import xlsxwriter
 class MaintenanceEquipment(models.Model):
     _inherit = 'maintenance.equipment'
 
+    #test
     x_studio_ubicacion_activo_name = fields.Char(related="x_studio_ubicacin_activo.x_name", string="Estado nombre")
 
     def _enviar_reporte_activos(self):
