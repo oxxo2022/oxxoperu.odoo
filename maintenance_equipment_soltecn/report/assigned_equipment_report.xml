@@ -19,17 +19,17 @@
                         <div class="row text-center" style="font-weight: bold; text-decoration: underline;">
                             <h3>Equipos Asignados</h3>
                         </div>
-                        <div class="row mb-1 text-center">
+                        <div class="row mb-2 text-center" style="font-weight: bold; font-size: 1.08rem">
                             Código Empleado:
                         </div>
-                        <div class="row mb-1 text-center">
+                        <div class="row mb-2 text-center" style="font-size: 1.08rem">
                             <!--VARIABLE CREADA POR ODOO STUDIO-->
                             <t t-esc="employee.x_studio_cdigo_empleado"/>
                         </div>
-                        <div class="row mb-1 text-center">
+                        <div class="row mb-2 text-center" style="font-weight: bold; font-size: 1.08rem">
                             Nombre del empleado:
                         </div>
-                        <div class="row mb-1 text-center">
+                        <div class="row mb-2 text-center" style="font-size: 1.08rem">
                             <t t-esc="employee.name"/>
                         </div>
                     </div>
