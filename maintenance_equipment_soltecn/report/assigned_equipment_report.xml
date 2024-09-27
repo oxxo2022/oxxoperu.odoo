@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <record id="hr_employee_assigned_equipment" model="ir.actions.report">
-        <field name="name">Equipos asignadoss</field>
+        <field name="name">Equipos Asignados</field>
         <field name="model">hr.employee</field>
         <field name="report_type">qweb-pdf</field>
         <field name="report_name">maintenance_equipment_soltecn.print_employee_assigned_equipment</field>
@@ -12,7 +12,7 @@
     </record>
 
     <template id="print_employee_assigned_equipment">
-        <t t-call="web.basic_layout">
+        <t t-call="web.external_layout">
             <div class="page">
                 <t t-foreach="docs" t-as="employee">
                     HOLA test
