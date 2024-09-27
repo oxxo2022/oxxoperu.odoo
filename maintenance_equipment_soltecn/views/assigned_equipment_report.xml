@@ -4,8 +4,8 @@
         <field name="name">Equipos asignados.</field>
         <field name="model">hr.employee</field>
         <field name="report_type">qweb-pdf</field>
-        <field name="report_name">maintenance_equipment_soltecn.print_employee_assigned_equipment</field>
-        <field name="report_file">maintenance_equipment_soltecn.print_employee_assigned_equipment</field>
+        <field name="report_name">print_employee_assigned_equipment</field>
+        <field name="report_file">print_employee_assigned_equipment</field>
         <field name="print_report_name">'Equipos asignados - %s' % (object.name).replace('/', '')</field>
         <field name="binding_model_id" ref="model_hr_employee"/>
         <field name="binding_type">report</field>
