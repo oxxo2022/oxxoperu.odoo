@@ -15,10 +15,14 @@
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="employee">
                 <t t-call="web.external_layout">
-                    HOLA test
-                    <!--<div class="page">
-                        HOLA test
-                    </div>-->
+                    <div class="page">
+                        <span 
+                            class="text-center"
+                            style="font-weight: bold; text-decoration: underline;"
+                        >
+                            Equipos Asignados
+                        </span>
+                    </div>
                 </t>
             </t>
         </t>
