@@ -16,12 +16,9 @@
             <t t-foreach="docs" t-as="employee">
                 <t t-call="web.external_layout">
                     <div class="page">
-                        <span 
-                            class="text-center"
-                            style="font-weight: bold; text-decoration: underline;"
-                        >
-                            Equipos Asignados
-                        </span>
+                        <div class="row text-center" style="font-weight: bold; text-decoration: underline;">
+                            <h2>Equipos Asignados</h2>
+                        </div>
                     </div>
                 </t>
             </t>
