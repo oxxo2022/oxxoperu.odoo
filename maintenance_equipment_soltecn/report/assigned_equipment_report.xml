@@ -17,7 +17,20 @@
                 <t t-call="web.external_layout">
                     <div class="page">
                         <div class="row text-center" style="font-weight: bold; text-decoration: underline;">
-                            <h2>Equipos Asignados</h2>
+                            <h3>Equipos Asignados</h3>
+                        </div>
+                        <div class="row mb-1 text-center">
+                            Código Empleado:
+                        </div>
+                        <div class="row mb-1 text-center">
+                            <!--VARIABLE CREADA POR ODOO STUDIO-->
+                            <t t-esc="employee.x_studio_cdigo_empleado"/>
+                        </div>
+                        <div class="row mb-1 text-center">
+                            Nombre del empleado:
+                        </div>
+                        <div class="row mb-1 text-center">
+                            <t t-esc="employee.name"/>
                         </div>
                     </div>
                 </t>
