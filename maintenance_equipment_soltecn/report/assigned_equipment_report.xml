@@ -12,13 +12,22 @@
     </record>
 
     <template id="print_employee_assigned_equipment">
-        <t t-call="web.external_layout">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="employee">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        HOLA test
+                    </div>
+                </t>
+            </t>
+        </t>
+        <!--<t t-call="web.external_layout">
             <div class="page">
                 <t t-foreach="docs" t-as="employee">
                     HOLA test
                 </t>
             </div>
-        </t>
+        </t>-->
     </template>
 </odoo>
 
