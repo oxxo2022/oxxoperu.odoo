@@ -10,7 +10,8 @@
     'depends': ['maintenance','hr'],
     'qweb': [],
     'data': [
-        'views/assigned_equipment_report.xml',
+        #'views/assigned_equipment_report.xml',
+        'report/assigned_equipment_report.xml',
     ],
     'installable': True,
     'license': 'AGPL-3',
