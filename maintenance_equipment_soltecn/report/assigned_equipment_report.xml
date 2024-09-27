@@ -32,6 +32,25 @@
                         <div class="row mb-2 text-center" style="font-size: 1.08rem">
                             <t t-esc="employee.name"/>
                         </div>
+                        <div class="row mb-2 text-center" style="font-weight: bold; font-size: 1.08rem">
+                            Puesto de trabajo:
+                        </div>
+                        <table class="table o_report_block_table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <span>TEST</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <span>TEST</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </t>
             </t>
