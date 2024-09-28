@@ -149,20 +149,25 @@
                                     * Se hace entrega del documento: POLITICA DE EQUIPOS INFORMATICOS Y DE TELECOMUNICACIONES
                                 </div>                
                             </div>
+                            <br/>
                             <div class="row mb-2" style="font-weight: bold; font-size: 0.95rem">
-                                <div class="col-9">
-                                    Nombre y Apellidos : _______________________________________
+                                <div class="col-6">
+                                    Nombre y Apellidos : ______________________________________
                                 </div>
-                                <div class="col-3">
-                                    DNI: ______________________
+                                <div class="col-2">
+                                </div>
+                                <div class="col-4">
+                                    DNI: _______________________
                                 </div>
                             </div>
+                            <br/>
+                            <br/>
                             <div class="row mb-2" style="font-weight: bold; font-size: 0.95rem">
                                 <div class="col-6">
-                                    Firma : _______________________________
+                                    Firma : __________________________________
                                 </div>
                                 <div class="col-6">
-                                    Fecha de entrega : _______________________
+                                    Fecha de entrega : __________________________
                                 </div>
                             </div>                          
                         </div>
