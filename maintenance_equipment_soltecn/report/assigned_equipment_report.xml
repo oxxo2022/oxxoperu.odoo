@@ -65,7 +65,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr t-foreach="employee.x_equipment_ids" t-as="equipment_line">
+                                <tr t-foreach="employee.equipment_ids" t-as="equipment_line">
                                     <td>
                                         <span t-field="equipment_line.display_name"/>
                                     </td>
