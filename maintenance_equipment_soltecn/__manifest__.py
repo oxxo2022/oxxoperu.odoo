@@ -7,7 +7,7 @@
     'maintainer': 'Soltecn',
     'company': 'Soltecn',
     'website': 'https://www.Soltecn.com',
-    'depends': ['maintenance','hr'],
+    'depends': ['maintenance','hr','base','web'],
     'qweb': [],
     'data': [
         #'views/assigned_equipment_report.xml',

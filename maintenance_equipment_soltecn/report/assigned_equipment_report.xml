@@ -38,7 +38,7 @@
                         <div class="row mb-2" style="font-size: 1.08rem">
                             <t t-esc="employee.job_title"/>
                         </div>
-                        <table class="table o_report_block_table">
+                        <table class="table table-sm o_main_table">
                             <thead>
                                 <tr>
                                     <th>
@@ -100,7 +100,7 @@
                                 class="row mb8 text-center"
                             >
                                 <div class="col-6">
-                                    <table>
+                                    <table class="o_report_block_table">
                                         <thead>
                                             <tr>
                                                 <th>
