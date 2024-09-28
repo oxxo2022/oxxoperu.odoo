@@ -89,10 +89,6 @@
                                     </td>
                                     <td>
                                         <!--VARIABLE CREADA POR ODOO STUDIO-->
-                                        <span t-field="equipment_line.x_studio_ubicacin_activo"/>
-                                    </td>
-                                    <td>
-                                        <!--VARIABLE CREADA POR ODOO STUDIO-->
                                         <span t-field="equipment_line.x_studio_detalle_ubicacin_activo"/>
                                     </td>
                                 </tr>
