@@ -100,7 +100,7 @@
                                 class="row mb8 text-center"
                             >
                                 <div class="col-6">
-                                    <table class="o_report_block_table">
+                                    <table class="table table-sm o_main_table">
                                         <thead>
                                             <tr>
                                                 <th>
@@ -118,7 +118,7 @@
                                     </table>                                
                                 </div>
                                 <div class="col-6">
-                                    <table class="table o_report_block_table">
+                                    <table class="table table-sm o_main_table">
                                         <thead>
                                             <tr>
                                                 <th>
