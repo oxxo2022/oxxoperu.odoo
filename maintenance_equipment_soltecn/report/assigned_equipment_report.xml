@@ -38,7 +38,7 @@
                         <div class="row mb-2" style="font-size: 1.08rem">
                             <t t-esc="employee.job_title"/>
                         </div>
-                        <table class="table table-sm o_main_table">
+                        <table class="table table-sm">
                             <thead>
                                 <tr>
                                     <th>
