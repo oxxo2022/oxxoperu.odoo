@@ -103,7 +103,7 @@
             <t t-call="web.external_layout">
                 <div class="page">
                     <div class="row text-center" name="title" style="font-weight: bold; text-decoration: underline;">
-                        <h3>ROBO O DETERIORO</h3>
+                        <h3>CESE</h3>
                     </div>
                     <div class="row mb-2" style="font-weight: bold; font-size: 1.08rem">
                         Nombre del empleado:
