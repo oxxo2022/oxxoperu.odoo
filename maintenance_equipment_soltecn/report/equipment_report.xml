@@ -34,7 +34,7 @@
                         Nombre del empleado:
                     </div>
                     <div class="row mb-2" style="font-size: 1.08rem">
-                        <t t-esc="doc[0].employee_id.name"/>
+                        <t t-esc="docs[0].employee_id.name"/>
                     </div>
                         <table class="table table-sm o_main_table">
                             <thead>
@@ -63,7 +63,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr t-foreach="doc" t-as="equipment_line">
+                                <tr t-foreach="docs" t-as="equipment_line">
                                     <td>
                                         <span t-field="equipment_line.display_name"/>
                                     </td>
