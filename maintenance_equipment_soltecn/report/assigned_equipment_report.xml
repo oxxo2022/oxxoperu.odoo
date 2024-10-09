@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hr_employee_assigned_equipment" model="ir.actions.report">
+        <field name="name">Equipos Asignados (Version 2)</field>
+        <field name="model">hr.employee</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">maintenance_equipment_soltecn.print_employee_assigned_equipment</field>
+        <field name="report_file">maintenance_equipment_soltecn.print_employee_assigned_equipment</field>
+        <field name="print_report_name">'Equipos asignados - %s' % (object.name).replace('/', '')</field>
+        <field name="binding_model_id" ref="hr.model_hr_employee"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="print_employee_assigned_equipment">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="employee">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <div class="row text-center" style="font-weight: bold; text-decoration: underline;">
+                            <h3>Equipos Asignados</h3>
+                        </div>
+                        <div class="row mb-2" style="font-weight: bold; font-size: 1.08rem">
+                            Código Empleado:
+                        </div>
+                        <div class="row mb-2" style="font-size: 1.08rem">
+                            <!--VARIABLE CREADA POR ODOO STUDIO-->
+                            <t t-esc="employee.x_studio_cdigo_empleado"/>
+                        </div>
+                        <div class="row mb-2" style="font-weight: bold; font-size: 1.08rem">
+                            Nombre del empleado:
+                        </div>
+                        <div class="row mb-2" style="font-size: 1.08rem">
+                            <t t-esc="employee.name"/>
+                        </div>
+                        <div class="row mb-2" style="font-weight: bold; font-size: 1.08rem">
+                            Puesto de trabajo:
+                        </div>
+                        <div class="row mb-2" style="font-size: 1.08rem">
+                            <t t-esc="employee.job_title"/>
+                        </div>
+                        <table class="table table-sm o_main_table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <span>ACTIVOS TI</span>
+                                    </th>
+                                    <th>
+                                        <span>Nº DE SERIE</span>
+                                    </th>
+                                    <th>
+                                        <span>MARCA</span>
+                                    </th>
+                                    <th>
+                                        <span>CELULAR</span>
+                                    </th>
+                                    <th>
+                                        <span>MODELO</span>
+                                    </th>
+                                    <th>
+                                        <span>UBICACIÓN</span>
+                                    </th>
+                                    <th>
+                                        <span>DETELLE UBICACIÓN</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="employee.equipment_ids" t-as="equipment_line">
+                                    <td>
+                                        <span t-field="equipment_line.display_name"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="equipment_line.serial_no"/>
+                                    </td>
+                                    <td>
+                                        <!--VARIABLE CREADA POR ODOO STUDIO-->
+                                        <span t-field="equipment_line.x_studio_marca"/>
+                                    </td>
+                                    <td>
+                                        <!--VARIABLE CREADA POR ODOO STUDIO-->
+                                        <span t-field="equipment_line.x_studio_celular"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="equipment_line.model"/>
+                                    </td> 
+                                    <td>
+                                        <!--VARIABLE CREADA POR ODOO STUDIO-->
+                                        <span t-field="equipment_line.x_studio_ubicacin_activo"/>
+                                    </td>
+                                    <td>
+                                        <!--VARIABLE CREADA POR ODOO STUDIO-->
+                                        <span t-field="equipment_line.x_studio_detalle_ubicacin_activo"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="col-12" name="tables">
+                            <div 
+                                class="row mb8 text-center"
+                            >
+                                <div class="col-6">
+                                    <table class="table table-sm o_main_table">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    <span>EQUIPOS ASIGNADOS</span>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr t-foreach="employee.x_studio_accesorios" t-as="acc_line">
+                                                <td>
+                                                    <span t-field="acc_line.display_name"/>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>                                
+                                </div>
+                                <div class="col-6">
+                                    <table class="table table-sm o_main_table">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    <span>SERVICIOS ASIGNADOS</span>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr t-foreach="employee.x_studio_servicios" t-as="serv_line">
+                                                <td>
+                                                    <span t-field="serv_line.display_name"/>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>                            
+                        </div>
+
+                        <div class="col-12">
+                            <div class="row mb-2" style="font-weight: bold; font-size: 0.95rem">
+                                <div class="col-12">
+                                    * Se entrega el presente equipamiento en correcto estado y 100% operativo.
+                                </div>             
+                            </div>
+                            <div class="row mb-2" style="font-weight: bold; font-size: 0.95rem">
+                                <div class="col-12">
+                                    * Se hace entrega del documento: POLITICA DE EQUIPOS INFORMATICOS Y DE TELECOMUNICACIONES
+                                </div>                
+                            </div>
+                            <br/>
+                            <div class="row mb-2" style="font-weight: bold; font-size: 0.95rem">
+                                <div class="col-7">
+                                    Nombre y Apellidos : _________________________________________________
+                                </div>
+                                <div class="col-1">
+                                </div>
+                                <div class="col-4">
+                                    DNI: _______________________
+                                </div>
+                            </div>
+                            <br/>
+                            <br/>
+                            <div class="row mb-2" style="font-weight: bold; font-size: 0.95rem">
+                                <div class="col-6">
+                                    Firma : __________________________________
+                                </div>
+                                <div class="col-6">
+                                    Fecha de entrega : __________________________
+                                </div>
+                            </div>                          
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+        <!--<t t-call="web.external_layout">
+            <div class="page">
+                <t t-foreach="docs" t-as="employee">
+                    HOLA test
+                </t>
+            </div>
+        </t>-->
+    </template>
+</odoo>
+

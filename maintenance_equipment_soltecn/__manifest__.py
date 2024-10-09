@@ -7,9 +7,13 @@
     'maintainer': 'Soltecn',
     'company': 'Soltecn',
     'website': 'https://www.Soltecn.com',
-    'depends': ['maintenance'],
+    'depends': ['maintenance','hr','base','web'],
     'qweb': [],
-    'data': [],
+    'data': [
+        #'views/assigned_equipment_report.xml',
+        'report/assigned_equipment_report.xml',
+        'report/equipment_report.xml',
+    ],
     'installable': True,
     'license': 'AGPL-3',
 }
