@@ -94,8 +94,38 @@
                                 </tr>
                             </tbody>
                         </table>
-
+                        
                         <div class="col-12" name="tables">
+                            <div 
+                                class="row mb8 text-center"
+                            >
+                                <div class="col-6">
+                                    <div 
+                                        class="row mb8 text-center border"
+                                    >
+                                        EQUIPOS ASIGNADOS
+                                    </div>
+                                    <div 
+                                        class="row mb8 text-center border"
+                                    >
+                                        EQUIPOS ASIGNADOS STRING
+                                    </div>                         
+                                </div>
+                                <div class="col-6">
+                                    <div 
+                                        class="row mb8 text-center border"
+                                    >
+                                        SERVICIOS ASIGNADOS
+                                    </div>
+                                    <div 
+                                        class="row mb8 text-center border"
+                                    >
+                                        SERVICIOS ASIGNADOS STRING
+                                    </div>  
+                                </div>
+                            </div>                            
+                        </div>
+                        <!--<div class="col-12" name="tables">
                             <div 
                                 class="row mb8 text-center"
                             >
@@ -138,7 +168,7 @@
                                     </table>
                                 </div>
                             </div>                            
-                        </div>
+                        </div>-->
 
                         <div class="col-12">
                             <div class="row mb-2" style="font-weight: bold; font-size: 0.95rem">
