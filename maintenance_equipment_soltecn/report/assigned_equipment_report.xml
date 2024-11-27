@@ -108,17 +108,16 @@
                                     </div>
                                     <t t-foreach="employee.x_studio_accesorios" t-as="acc_line">
                                         <div 
-                                            class="row text-center border border-dark"
+                                            class="row border border-dark"
                                         >
-                                            <div class="col-6">
-                                                <div class="row">
-                                                    <div class="col-5 text-center">
-                                                        SERVICIOS ASIGNADOS STRING
-                                                    </div>
-                                                    <div class="col-1">
-                                                        2
-                                                    </div>
-                                                </div>
+                                            <!-- Fila principal dentro de la columna -->
+                                            <div class="col-5 text-center">
+                                                <span t-field="acc_line.display_name" />
+                                            </div>
+                                            <div class="col-1 d-flex justify-content-center align-items-center">
+                                                <span 
+                                                    style="border: 1px solid #000; width: 16px; height: 16px; display: inline-block;"
+                                                ></span>
                                             </div>
                                         </div>
                                     </t>                  
