@@ -111,13 +111,11 @@
                                             class="row border border-dark"
                                         >
                                             <!-- Fila principal dentro de la columna -->
-                                            <div class="col-5 text-center">
+                                            <div class="col-5">
                                                 <span t-field="acc_line.display_name" />
                                             </div>
-                                            <div class="col-1 d-flex justify-content-center align-items-center">
-                                                <span 
-                                                    style="border: 1px solid #000; width: 16px; height: 16px; display: inline-block;"
-                                                ></span>
+                                            <div class="col-1">
+                                                S
                                             </div>
                                         </div>
                                     </t>                  
