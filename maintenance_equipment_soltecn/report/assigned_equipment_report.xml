@@ -97,14 +97,14 @@
                         
                         <div class="col-12 mb8" name="tables">
                             <div 
-                                class="row text-center"
+                                class="row"
                             >
                                 <div class="col-6">
                                     <div 
                                         class="row text-center border border-dark"
                                         style="padding: 10px;"
                                     >
-                                        <span class="text-center">EQUIPOS ASIGNADOS</span>
+                                        <span style="color: #B8860B;">EQUIPOS ASIGNADOS</span>
                                     </div>
                                     <t t-foreach="employee.x_studio_accesorios" t-as="acc_line">
                                         <div 
@@ -112,7 +112,7 @@
                                             style="padding: 10px;"
                                         >
                                             <div class="col-11 d-flex align-items-center">
-                                                <span class="text-center" t-field="acc_line.display_name" />
+                                                <span t-field="acc_line.display_name" />
                                             </div>
                                             <!-- Cuadro en 2 columnas -->
                                             <div class="col-1 d-flex justify-content-center align-items-center">
