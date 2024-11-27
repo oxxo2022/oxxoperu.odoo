@@ -194,7 +194,7 @@
                             </div>                            
                         </div>-->
 
-                        <div class="col-12">
+                        <div class="col-12" style="page-break-inside: avoid;">
                             <div class="row mb-2" style="font-weight: bold; font-size: 0.95rem">
                                 <div class="col-12">
                                     * Se entrega el presente equipamiento en correcto estado y 100% operativo.
