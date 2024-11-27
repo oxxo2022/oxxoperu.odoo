@@ -109,10 +109,13 @@
                                     <t t-foreach="employee.x_studio_accesorios" t-as="acc_line">
                                         <div 
                                             class="row text-center border border-dark"
-                                            style="padding: 10px; position: relative; align-items: center;"
                                         >
-                                            <span t-field="acc_line.display_name" />
-                                            <span style="border: 1px solid #000; display: inline-block; width: 16px; height: 16px; position: absolute; right: 10px;"></span>
+                                            <div class="col-5 text-center">
+                                                SERVICIOS ASIGNADOS STRING
+                                            </div>
+                                            <div class="col-1">
+                                                2
+                                            </div>
                                         </div>
                                     </t>                  
                                 </div>
