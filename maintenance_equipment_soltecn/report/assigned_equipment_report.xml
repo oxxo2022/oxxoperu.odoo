@@ -101,27 +101,30 @@
                             >
                                 <div class="col-6">
                                     <div 
-                                        class="row text-center border border-black"
+                                        class="row text-center border border-dark"
                                         style="padding: 10px;"
                                     >
                                         EQUIPOS ASIGNADOS
                                     </div>
-                                    <div 
-                                        class="row text-center border border-black"
-                                        style="padding: 10px;"
-                                    >
-                                        EQUIPOS ASIGNADOS STRING
-                                    </div>                         
+                                    <t t-foreach="employee.x_studio_accesorios" t-as="acc_line">
+                                        <div 
+                                            class="row text-center border border-dark"
+                                            style="padding: 10px; position: relative; "
+                                        >
+                                            <span t-field="acc_line.display_name"/>
+                                            <span style="border: 1px solid #000; display: inline-block; width: 16px; height: 16px; position: absolute; right: 10px;"></span>
+                                        </div>
+                                    </t>                   
                                 </div>
                                 <div class="col-6">
                                     <div 
-                                        class="row text-center border border-black"
+                                        class="row text-center border border-dark"
                                         style="padding: 10px;"
                                     >
                                         SERVICIOS ASIGNADOS
                                     </div>
                                     <div 
-                                        class="row text-center border border-black"
+                                        class="row text-center border border-dark"
                                         style="padding: 10px;"
                                     >
                                         SERVICIOS ASIGNADOS STRING
