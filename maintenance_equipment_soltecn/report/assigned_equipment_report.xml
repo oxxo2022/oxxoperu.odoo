@@ -104,7 +104,7 @@
                                         class="row text-center border border-dark"
                                         style="padding: 10px;"
                                     >
-                                        <span style="color: #B8860B;">EQUIPOS ASIGNADOS</span>
+                                        <span style="color: #B8860B; font-weight: bold;">EQUIPOS ASIGNADOS</span>
                                     </div>
                                     <t t-foreach="employee.x_studio_accesorios" t-as="acc_line">
                                         <div 
@@ -128,14 +128,24 @@
                                         class="row text-center border border-dark"
                                         style="padding: 10px;"
                                     >
-                                        SERVICIOS ASIGNADOS
+                                        <span style="color: #B8860B; font-weight: bold;">SERVICIOS ASIGNADOS</span>
                                     </div>
-                                    <div 
-                                        class="row text-center border border-dark"
-                                        style="padding: 10px;"
-                                    >
-                                        SERVICIOS ASIGNADOS STRING
-                                    </div>  
+                                    <t t-foreach="employee.x_studio_servicios" t-as="serv_line">
+                                        <div 
+                                            class="row border border-dark border-top-0"
+                                            style="padding: 10px;"
+                                        >
+                                            <div class="col-11 d-flex align-items-center">
+                                                <span t-field="serv_line.display_name"/>
+                                            </div>
+                                            <!-- Cuadro en 2 columnas -->
+                                            <div class="col-1 d-flex justify-content-center align-items-center">
+                                                <span 
+                                                    style="border: 1px solid #000; width: 16px; height: 16px; display: inline-block;"
+                                                ></span>
+                                            </div>
+                                        </div>
+                                    </t>                  
                                 </div>
                             </div>                            
                         </div>
