@@ -110,11 +110,13 @@
                                         <div 
                                             class="row text-center border border-dark"
                                         >
-                                            <div class="col-5 text-center">
-                                                SERVICIOS ASIGNADOS STRING
-                                            </div>
-                                            <div class="col-1">
-                                                2
+                                            <div class="col-6">
+                                                <div class="col-5 text-center">
+                                                    SERVICIOS ASIGNADOS STRING
+                                                </div>
+                                                <div class="col-1">
+                                                    2
+                                                </div>
                                             </div>
                                         </div>
                                     </t>                  
