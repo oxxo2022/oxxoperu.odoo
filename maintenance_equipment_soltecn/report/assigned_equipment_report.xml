@@ -108,13 +108,11 @@
                                     </div>
                                     <t t-foreach="employee.x_studio_accesorios" t-as="acc_line">
                                         <div 
-                                            class="row border border-dark"
-                                            style="padding: 10px; display: flex; justify-content: space-between; align-items: center;"
+                                            class="row text-center border border-dark"
+                                            style="padding: 10px; position: relative;"
                                         >
                                             <span t-field="acc_line.display_name" />
-                                            <span 
-                                                style="border: 1px solid #000; width: 16px; height: 16px; margin-left: 10px;"
-                                            ></span>
+                                            <span style="border: 1px solid #000; display: inline-block; width: 16px; height: 16px; position: absolute; right: 10px;"></span>
                                         </div>
                                     </t>                  
                                 </div>
