@@ -95,7 +95,7 @@
                             </tbody>
                         </table>
                         
-                        <div class="col-12" name="tables">
+                        <div class="col-12 mb8" name="tables">
                             <div 
                                 class="row text-center"
                             >
@@ -108,14 +108,14 @@
                                     </div>
                                     <t t-foreach="employee.x_studio_accesorios" t-as="acc_line">
                                         <div 
-                                            class="row border border-dark"
+                                            class="row border border-dark border-top-0"
                                             style="padding: 10px;"
                                         >
-                                            <div class="col-10 d-flex align-items-center">
+                                            <div class="col-11 d-flex align-items-center">
                                                 <span t-field="acc_line.display_name" />
                                             </div>
                                             <!-- Cuadro en 2 columnas -->
-                                            <div class="col-2 d-flex justify-content-center align-items-center">
+                                            <div class="col-1 d-flex justify-content-center align-items-center">
                                                 <span 
                                                     style="border: 1px solid #000; width: 16px; height: 16px; display: inline-block;"
                                                 ></span>
