@@ -111,9 +111,9 @@
                                             class="row border border-dark"
                                             style="padding: 10px; display: flex; justify-content: space-between; align-items: center;"
                                         >
-                                            <span t-field="acc_line.display_name"/>
+                                            <span t-field="acc_line.display_name" style="flex: 1;"/>
                                             <span 
-                                                style="border: 1px solid #000; display: inline-block; width: 16px; height: 16px;"
+                                                style="border: 1px solid #000; display: inline-block; width: 16px; height: 16px; margin-left: auto;"
                                             ></span>
                                         </div>
                                     </t>                   
