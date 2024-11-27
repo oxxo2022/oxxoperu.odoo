@@ -101,24 +101,28 @@
                             >
                                 <div class="col-6">
                                     <div 
-                                        class="row mb8 text-center border"
+                                        class="row text-center border border-black"
+                                        style="padding: 10px;"
                                     >
                                         EQUIPOS ASIGNADOS
                                     </div>
                                     <div 
-                                        class="row mb8 text-center border"
+                                        class="row text-center border border-black"
+                                        style="padding: 10px;"
                                     >
                                         EQUIPOS ASIGNADOS STRING
                                     </div>                         
                                 </div>
                                 <div class="col-6">
                                     <div 
-                                        class="row mb8 text-center border"
+                                        class="row text-center border border-black"
+                                        style="padding: 10px;"
                                     >
                                         SERVICIOS ASIGNADOS
                                     </div>
                                     <div 
-                                        class="row mb8 text-center border"
+                                        class="row text-center border border-black"
+                                        style="padding: 10px;"
                                     >
                                         SERVICIOS ASIGNADOS STRING
                                     </div>  
