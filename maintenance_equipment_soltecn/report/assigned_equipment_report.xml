@@ -110,8 +110,9 @@
                                         </thead>
                                         <tbody>
                                             <tr t-foreach="employee.x_studio_accesorios" t-as="acc_line">
-                                                <td>
+                                                <td style="position: relative;">                                         
                                                     <span t-field="acc_line.display_name"/>
+                                                    <span style="border: 1px solid #000; display: inline-block; width: 16px; height: 16px; position: absolute; right: 0;"></span>
                                                 </td>
                                             </tr>
                                         </tbody>
