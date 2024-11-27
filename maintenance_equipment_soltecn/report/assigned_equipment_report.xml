@@ -109,6 +109,7 @@
                                     <t t-foreach="employee.x_studio_accesorios" t-as="acc_line">
                                         <div 
                                             class="row border border-dark"
+                                            style="padding: 10px;"
                                         >
                                             <div class="col-10 d-flex align-items-center">
                                                 <span t-field="acc_line.display_name" />
