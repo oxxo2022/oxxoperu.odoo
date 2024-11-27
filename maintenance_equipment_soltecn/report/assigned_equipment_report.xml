@@ -110,12 +110,14 @@
                                         <div 
                                             class="row border border-dark"
                                         >
-                                            <!-- Fila principal dentro de la columna -->
-                                            <div class="col-5">
+                                            <div class="col-10 d-flex align-items-center">
                                                 <span t-field="acc_line.display_name" />
                                             </div>
-                                            <div class="col-1">
-                                                S
+                                            <!-- Cuadro en 2 columnas -->
+                                            <div class="col-2 d-flex justify-content-center align-items-center">
+                                                <span 
+                                                    style="border: 1px solid #000; width: 16px; height: 16px; display: inline-block;"
+                                                ></span>
                                             </div>
                                         </div>
                                     </t>                  
