@@ -9,8 +9,8 @@
             <xpath expr="//notebook" position="inside">
                 <page name="additional_info" string="Configuracion de Herramientas">
                     <group>
-                        <field name="image_global_protect"/>
-                        <field name="image_cortex"/>
+                        <field name="image_global_protect" widget="image"/>
+                        <field name="image_cortex" widget="image"/>
                     </group>
                 </page>
             </xpath>
