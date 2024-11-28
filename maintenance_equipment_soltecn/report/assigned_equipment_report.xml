@@ -16,29 +16,31 @@
             <t t-foreach="docs" t-as="employee">
                 <t t-call="web.external_layout">
                     <div class="page">
-                        <div class="row text-center" style="font-weight: bold; text-decoration: underline;">
-                            <h3>Equipos Asignados</h3>
+                        <div class="col-12">
+                            <div class="row text-center" style="font-weight: bold; text-decoration: underline;">
+                                <h4>Equipos Asignados</h4>
+                            </div>
+                            <div class="row mb-2" style="font-weight: bold; font-size: 1.08rem">
+                                Código Empleado:
+                            </div>
+                            <div class="row mb-2" style="font-size: 1.08rem">
+                                <!--VARIABLE CREADA POR ODOO STUDIO-->
+                                <t t-esc="employee.x_studio_cdigo_empleado"/>
+                            </div>
+                            <div class="row mb-2" style="font-weight: bold; font-size: 1.08rem">
+                                Nombre del empleado:
+                            </div>
+                            <div class="row mb-2" style="font-size: 1.08rem">
+                                <t t-esc="employee.name"/>
+                            </div>
+                            <div class="row mb-2" style="font-weight: bold; font-size: 1.08rem">
+                                Puesto de trabajo:
+                            </div>
+                            <div class="row mb-2" style="font-size: 1.08rem">
+                                <t t-esc="employee.job_title"/>
+                            </div>
                         </div>
-                        <div class="row mb-2" style="font-weight: bold; font-size: 1.08rem">
-                            Código Empleado:
-                        </div>
-                        <div class="row mb-2" style="font-size: 1.08rem">
-                            <!--VARIABLE CREADA POR ODOO STUDIO-->
-                            <t t-esc="employee.x_studio_cdigo_empleado"/>
-                        </div>
-                        <div class="row mb-2" style="font-weight: bold; font-size: 1.08rem">
-                            Nombre del empleado:
-                        </div>
-                        <div class="row mb-2" style="font-size: 1.08rem">
-                            <t t-esc="employee.name"/>
-                        </div>
-                        <div class="row mb-2" style="font-weight: bold; font-size: 1.08rem">
-                            Puesto de trabajo:
-                        </div>
-                        <div class="row mb-2" style="font-size: 1.08rem">
-                            <t t-esc="employee.job_title"/>
-                        </div>
-                        <table class="table table-sm o_main_table">
+                        <table class="table table-sm o_main_table" style="font-size: 1.08rem">
                             <thead>
                                 <tr>
                                     <th>
