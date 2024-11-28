@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="inherit_employee_form_add_page" model="ir.ui.view">
+        <field name="name">hr.employee.form.add.page</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page name="additional_info" string="Configuracion de Herramientas">
+                    <group>
+                        <field name="image_global_protect"/>
+                        <field name="image_cortex"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
