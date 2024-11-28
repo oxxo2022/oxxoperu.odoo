@@ -251,7 +251,27 @@
                                 >
                                     <img t-if="employee.image_global_protect" 
                                         t-att-src="image_data_uri(employee.image_global_protect)" 
-                                        style="display: block; margin: 0 auto; max-width: 100%; max-height: 290px;"/>
+                                        style="display: block; margin: 0 auto; max-width: 100%; max-height: 300px;"/>
+                                </div>           
+                            </div>
+                            <div class="row mb-8" style="font-weight: bold; font-size: 0.97rem">
+                                <div class="col-1 text-right">
+                                    2.
+                                </div>
+                                <div class="col-11 text-left">
+                                    Cortex:
+                                </div>           
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-1 text-right">
+                                </div>
+
+                                <div class="col-11 text-center border border-dark"
+                                    style="padding: 10px;"
+                                >
+                                    <img t-if="employee.image_cortex" 
+                                        t-att-src="image_data_uri(employee.image_cortex)" 
+                                        style="display: block; margin: 0 auto; max-width: 100%; max-height: 300px;"/>
                                 </div>           
                             </div>
                         </div>
