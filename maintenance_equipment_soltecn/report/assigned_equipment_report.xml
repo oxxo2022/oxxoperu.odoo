@@ -16,6 +16,12 @@
             <t t-foreach="docs" t-as="employee">
                 <t t-call="web.external_layout">
                     <div class="page">
+                        <style>
+                            .page-break {
+                                page-break-before: always;
+                                page-break-inside: avoid;
+                            }
+                        </style>
                         <div class="col-12">
                             <div class="row text-center" style="font-weight: bold; text-decoration: underline;">
                                 <h4>Equipos Asignados</h4>
@@ -230,7 +236,7 @@
                             </div>                          
                         </div>
                         <br/>
-                        <div class="col-12">
+                        <div class="col-12 page-break">
                             <div class="row mb-2" style="font-weight: bold; font-size: 0.97rem">
                                 <div class="col-12">
                                     Evidencias de Instalación y Configuración
