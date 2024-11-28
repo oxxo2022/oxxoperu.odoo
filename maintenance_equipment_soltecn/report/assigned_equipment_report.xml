@@ -102,14 +102,14 @@
                                 <div class="col-6">
                                     <div 
                                         class="row text-center border border-dark"
-                                        style="padding: 10px;"
+                                        style="padding: 4px;"
                                     >
                                         <span style="color: #B8860B; font-weight: bold;">EQUIPOS ASIGNADOS</span>
                                     </div>
                                     <t t-foreach="employee.x_studio_accesorios" t-as="acc_line">
                                         <div 
                                             class="row border border-dark border-top-0"
-                                            style="padding: 10px;"
+                                            style="padding: 4px;"
                                         >
                                             <div class="col-11 d-flex align-items-center">
                                                 <span t-field="acc_line.display_name" />
@@ -126,14 +126,14 @@
                                 <div class="col-6">
                                     <div 
                                         class="row text-center border border-dark"
-                                        style="padding: 10px;"
+                                        style="padding: 4px;"
                                     >
-                                        <span style="color: #B8860B; font-weight: bold;">SERVICIOS ASIGNADOS</span>
+                                        <span style="color: #B8860B; font-weight: bold;">HERRAMIENTAS ASIGNADAS</span>
                                     </div>
                                     <t t-foreach="employee.x_studio_servicios" t-as="serv_line">
                                         <div 
                                             class="row border border-dark border-top-0"
-                                            style="padding: 10px;"
+                                            style="padding: 4px;"
                                         >
                                             <div class="col-11 d-flex align-items-center">
                                                 <span t-field="serv_line.display_name"/>
