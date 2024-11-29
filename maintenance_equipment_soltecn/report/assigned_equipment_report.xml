@@ -16,29 +16,37 @@
             <t t-foreach="docs" t-as="employee">
                 <t t-call="web.external_layout">
                     <div class="page">
-                        <div class="row text-center" style="font-weight: bold; text-decoration: underline;">
-                            <h3>Equipos Asignados</h3>
+                        <style>
+                            .page-break {
+                                page-break-before: always;
+                                page-break-inside: avoid;
+                            }
+                        </style>
+                        <div class="col-12">
+                            <div class="row text-center" style="font-weight: bold; text-decoration: underline;">
+                                <h4>Equipos Asignados</h4>
+                            </div>
+                            <div class="row mb-2" style="font-weight: bold; font-size: 1.08rem">
+                                Código Empleado:
+                            </div>
+                            <div class="row mb-2" style="font-size: 1.08rem">
+                                <!--VARIABLE CREADA POR ODOO STUDIO-->
+                                <t t-esc="employee.x_studio_cdigo_empleado"/>
+                            </div>
+                            <div class="row mb-2" style="font-weight: bold; font-size: 1.08rem">
+                                Nombre del empleado:
+                            </div>
+                            <div class="row mb-2" style="font-size: 1.08rem">
+                                <t t-esc="employee.name"/>
+                            </div>
+                            <div class="row mb-2" style="font-weight: bold; font-size: 1.08rem">
+                                Puesto de trabajo:
+                            </div>
+                            <div class="row mb-2" style="font-size: 1.08rem">
+                                <t t-esc="employee.job_title"/>
+                            </div>
                         </div>
-                        <div class="row mb-2" style="font-weight: bold; font-size: 1.08rem">
-                            Código Empleado:
-                        </div>
-                        <div class="row mb-2" style="font-size: 1.08rem">
-                            <!--VARIABLE CREADA POR ODOO STUDIO-->
-                            <t t-esc="employee.x_studio_cdigo_empleado"/>
-                        </div>
-                        <div class="row mb-2" style="font-weight: bold; font-size: 1.08rem">
-                            Nombre del empleado:
-                        </div>
-                        <div class="row mb-2" style="font-size: 1.08rem">
-                            <t t-esc="employee.name"/>
-                        </div>
-                        <div class="row mb-2" style="font-weight: bold; font-size: 1.08rem">
-                            Puesto de trabajo:
-                        </div>
-                        <div class="row mb-2" style="font-size: 1.08rem">
-                            <t t-esc="employee.job_title"/>
-                        </div>
-                        <table class="table table-sm o_main_table">
+                        <table class="table table-sm o_main_table" style="font-size: 1.08rem">
                             <thead>
                                 <tr>
                                     <th>
@@ -94,8 +102,62 @@
                                 </tr>
                             </tbody>
                         </table>
-
-                        <div class="col-12" name="tables">
+                        
+                        <div class="col-12 mb8" name="tables">
+                            <div 
+                                class="row"
+                            >
+                                <div class="col-6">
+                                    <div 
+                                        class="row text-center border border-dark"
+                                        style="padding: 4px;"
+                                    >
+                                        <span style="color: #B8860B; font-weight: bold;">EQUIPOS ASIGNADOS</span>
+                                    </div>
+                                    <t t-foreach="employee.x_studio_accesorios" t-as="acc_line">
+                                        <div 
+                                            class="row border border-dark border-top-0"
+                                            style="padding: 4px;"
+                                        >
+                                            <div class="col-11 d-flex align-items-center">
+                                                <span t-field="acc_line.display_name" />
+                                            </div>
+                                            <!-- Cuadro en 2 columnas -->
+                                            <div class="col-1 d-flex justify-content-center align-items-center">
+                                                <span 
+                                                    style="border: 1px solid #000; width: 16px; height: 16px; display: inline-block;"
+                                                ></span>
+                                            </div>
+                                        </div>
+                                    </t>                  
+                                </div>
+                                <div class="col-6">
+                                    <div 
+                                        class="row text-center border border-dark"
+                                        style="padding: 4px;"
+                                    >
+                                        <span style="color: #B8860B; font-weight: bold;">HERRAMIENTAS ASIGNADAS</span>
+                                    </div>
+                                    <t t-foreach="employee.x_studio_servicios" t-as="serv_line">
+                                        <div 
+                                            class="row border border-dark border-top-0"
+                                            style="padding: 4px;"
+                                        >
+                                            <div class="col-11 d-flex align-items-center">
+                                                <span t-field="serv_line.display_name"/>
+                                            </div>
+                                            <!-- Cuadro en 2 columnas -->
+                                            <div class="col-1 d-flex justify-content-center align-items-center">
+                                                <span 
+                                                    style="border: 1px solid #000; width: 16px; height: 16px; display: inline-block;"
+                                                ></span>
+                                            </div>
+                                        </div>
+                                    </t>                  
+                                </div>
+                            </div>                            
+                        </div>
+                        <!--<div class="col-12" name="tables">
                             <div 
                                 class="row mb8 text-center"
                             >
@@ -110,8 +172,9 @@
                                         </thead>
                                         <tbody>
                                             <tr t-foreach="employee.x_studio_accesorios" t-as="acc_line">
-                                                <td>
+                                                <td style="position: relative;  border: 3px solid #000;">                                         
                                                     <span t-field="acc_line.display_name"/>
+                                                    <span style="border: 1px solid #000; display: inline-block; width: 16px; height: 16px; position: absolute; right: 10px;"></span>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -121,24 +184,25 @@
                                     <table class="table table-sm o_main_table">
                                         <thead>
                                             <tr>
-                                                <th>
+                                                <th style="border: 3px solid #000;">
                                                     <span>SERVICIOS ASIGNADOS</span>
                                                 </th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr t-foreach="employee.x_studio_servicios" t-as="serv_line">
-                                                <td>
+                                                <td style="position: relative;  border: 3px solid #000;">  
                                                     <span t-field="serv_line.display_name"/>
+                                                    <span style="border: 1px solid #000; display: inline-block; width: 16px; height: 16px; position: absolute; right: 10px;"></span>
                                                 </td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>                            
-                        </div>
+                        </div>-->
 
-                        <div class="col-12">
+                        <div class="col-12" style="page-break-inside: avoid;">
                             <div class="row mb-2" style="font-weight: bold; font-size: 0.95rem">
                                 <div class="col-12">
                                     * Se entrega el presente equipamiento en correcto estado y 100% operativo.
@@ -170,6 +234,54 @@
                                     Fecha de entrega : __________________________
                                 </div>
                             </div>                          
+                        </div>
+                        <br/>
+                        <div class="col-12 page-break">
+                            <div class="row mb-2" style="font-weight: bold; font-size: 0.97rem">
+                                <div class="col-12">
+                                    Evidencias de Instalación y Configuración
+                                </div>             
+                            </div>
+                            <div class="row mb-8" style="font-weight: bold; font-size: 0.97rem">
+                                <div class="col-1 text-right">
+                                    1.
+                                </div>
+                                <div class="col-11 text-left">
+                                    Global Protect:
+                                </div>           
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-1 text-right">
+                                </div>
+
+                                <div class="col-11 text-center border border-dark"
+                                    style="padding: 10px;"
+                                >
+                                    <img t-if="employee.image_global_protect" 
+                                        t-att-src="image_data_uri(employee.image_global_protect)" 
+                                        style="display: block; margin: 0 auto; max-width: 100%; max-height: 300px;"/>
+                                </div>           
+                            </div>
+                            <div class="row mb-8" style="font-weight: bold; font-size: 0.97rem">
+                                <div class="col-1 text-right">
+                                    2.
+                                </div>
+                                <div class="col-11 text-left">
+                                    Cortex:
+                                </div>           
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-1 text-right">
+                                </div>
+
+                                <div class="col-11 text-center border border-dark"
+                                    style="padding: 10px;"
+                                >
+                                    <img t-if="employee.image_cortex" 
+                                        t-att-src="image_data_uri(employee.image_cortex)" 
+                                        style="display: block; margin: 0 auto; max-width: 100%; max-height: 300px;"/>
+                                </div>           
+                            </div>
                         </div>
                     </div>
                 </t>

@@ -13,6 +13,7 @@
         #'views/assigned_equipment_report.xml',
         'report/assigned_equipment_report.xml',
         'report/equipment_report.xml',
+        'views/hr_employee_views.xml',
     ],
     'installable': True,
     'license': 'AGPL-3',
