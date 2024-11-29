@@ -7,6 +7,7 @@
         <field name="inherit_id" ref="hr.view_employee_form"/>
         <field name="arch" type="xml">
             <xpath expr="//notebook" position="inside">
+                <!--ESTA VISTA SE AGREGO DE MANERA MANUAL EN EL GRUPO DE EMPLEADOS CONSULTAS PARA QUE SE PUEDE VISIALIZAR AHI-->
                 <page name="additional_info" string="Configuracion de Herramientas">
                     <group>
                         <field name="image_global_protect" widget="image"/>
