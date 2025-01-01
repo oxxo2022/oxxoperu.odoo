@@ -19,7 +19,7 @@ class MaintenanceEquipment(models.Model):
         string='Criticidad',
         selection=[('Crítico', 'Crítico'), ('No crítico', 'No crítico')]
     )
-    x_studio_sistema_operativo_1=fields.Char(,string="Sistema Operativo")
+    x_studio_sistema_operativo_1=fields.Char(string="Sistema Operativo")
     
     def _enviar_reporte_activos(self):
         return self.send_email_custom()
