@@ -14,11 +14,9 @@ class MaintenanceEquipment(models.Model):
     x_studio_nombre_host=fields.Char(string="Nombre Host")
     x_studio_memoria_ram_1=fields.Char(string="Memoria RAM")
     x_studio_disco_duro_1=fields.Char(string="Disco Duro")
-    x_studio_procesador_2=fields.Char(,string="Procesador")
-    x_studio_criticidad_1= fields.Selection(
-        string='Criticidad',
-        selection=[('Crítico', 'Crítico'), ('No crítico', 'No crítico')]
-    )
+    x_studio_procesador_2=fields.Char(string="Procesador")
+    x_studio_criticidad_1= fields.Selection(string="Criticidad",
+        selection=[("Crítico", "Crítico"), ("No crítico", "No crítico")])
     x_studio_sistema_operativo_1=fields.Char(string="Sistema Operativo")
     
     def _enviar_reporte_activos(self):
