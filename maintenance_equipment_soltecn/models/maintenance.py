@@ -11,10 +11,16 @@ class MaintenanceEquipment(models.Model):
     _inherit = 'maintenance.equipment'
 
     x_studio_ubicacion_activo_name = fields.Char(related="x_studio_ubicacin_activo.x_name", string="Estado nombre")
-    x_studio_nombre_host=fields.Char(string="Estado nombre",strring="Nombre Host")
-    x_studio_memoria_ram_1=fields.Char(string="Estado nombre",strring="Memoria RAM")
-    x_studio_disco_duro_1=fields.Char(string="Estado nombre",strring="Disco Duro")
-    x_studio_procesador_2=fields.Char(string="Estado nombre",strring="Procesador")
+    x_studio_nombre_host=fields.Char(string="Nombre Host")
+    x_studio_memoria_ram_1=fields.Char(string="Memoria RAM")
+    x_studio_disco_duro_1=fields.Char(string="Disco Duro")
+    x_studio_procesador_2=fields.Char(,string="Procesador")
+    x_studio_sistema_operativo_1= fields.Selection(
+        string='Sistema Operativo',
+        selection=[('Crítico', 'Crítico'), ('No crítico', 'No crítico')]
+    )
+    (string="Sistema Operativo")
+    x_studio_criticidad_1
     def _enviar_reporte_activos(self):
         return self.send_email_custom()
 
