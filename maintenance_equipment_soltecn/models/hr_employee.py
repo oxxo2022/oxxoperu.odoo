@@ -10,5 +10,4 @@ class Employee(models.Model):
     _inherit = "hr.employee"
 
     image_global_protect = fields.Image(string="Imagen Global Protect")
-
     image_cortex = fields.Image(string="Imagen Cortex")
