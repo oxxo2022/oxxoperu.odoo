@@ -6,7 +6,6 @@ from odoo.osv import expression
 from odoo.addons.resource.models.resource import Intervals
 from odoo.exceptions import UserError
 
-
 class Employee(models.Model):
     _inherit = "hr.employee"
 
