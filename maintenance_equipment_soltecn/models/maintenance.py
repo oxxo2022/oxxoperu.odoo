@@ -41,6 +41,8 @@ class MaintenanceEquipment(models.Model):
             "N° de serie",
             "Ubicación",
             "Ubicación detalle",
+            #TEST
+            "ID",
         ]
 
         rows = []
@@ -50,7 +52,8 @@ class MaintenanceEquipment(models.Model):
                 line.x_studio_estado,
                 line.serial_no,
                 line.x_studio_ubicacin_activo.x_name,
-                line.x_studio_detalle_ubicacin_activo.x_name
+                line.x_studio_detalle_ubicacin_activo.x_name,
+                line.id
             ))
 
         col = 0
