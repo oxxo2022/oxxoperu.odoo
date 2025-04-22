@@ -34,7 +34,12 @@ class MaintenanceEquipment(models.Model):
 
         self.env.cr.flush()
 
-        maintenance_equipment_to_report = self.env["maintenance.equipment"].search([('x_studio_estado', '=', 'Asignado'),('x_studio_ubicacion_activo_name', 'ilike', 'TIENDA%')])
+        maintenance_equipment_to_report = self.env["maintenance.equipment"].browse(
+            self.env["maintenance.equipment"].search([
+                ('x_studio_estado', '=', 'Asignado'),
+                ('x_studio_ubicacion_activo_name', 'ilike', 'TIENDA%')
+            ]).ids
+        )
         
         output = io.BytesIO()
         workbook = xlsxwriter.Workbook(output, {'in_memory': True})
