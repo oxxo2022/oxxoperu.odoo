@@ -34,7 +34,7 @@ class MaintenanceEquipment(models.Model):
         style_highlight = workbook.add_format({'bold': True, 'pattern': 1, 'bg_color': '#E0E0E0', 'align': 'center'})
         style_normal = workbook.add_format({'align': 'center'})
         row = 0
-
+        #s
         headers = [
             "Activo",
             "Estado",
