@@ -19,15 +19,15 @@ class MaintenanceEquipment(models.Model):
         selection=[("Crítico", "Crítico"), ("No crítico", "No crítico")])
     x_studio_sistema_operativo_1=fields.Char(string="Sistema Operativo")
 
-    aux_name = fields.Char(string="Estado nombre",compute='_compute_aux_name')
+    # aux_name = fields.Char(string="Estado nombre",compute='_compute_aux_name')
     
     def _enviar_reporte_activos(self):
         return self.send_email_custom()
 
-    # @api.depends('name','serial_no')
-    def _compute_aux_name(self):
-        for record in self:
-                record.aux_name = record.name    
+    # # @api.depends('name','serial_no')
+    # def _compute_aux_name(self):
+    #     for record in self:
+    #             record.aux_name = record.name    
 
     # METODO
     @api.model
@@ -42,6 +42,12 @@ class MaintenanceEquipment(models.Model):
                 ('x_studio_ubicacion_activo_name', 'ilike', 'TIENDA%')
             ]).ids
         )
+
+        self.env.cr.execute("""
+            SELECT id, name FROM maintenance_equipment
+            WHERE id IN %s
+        """, (tuple(maintenance_equipment_to_report.ids),))
+        names_dict = dict(self.env.cr.fetchall())
         
         output = io.BytesIO()
         workbook = xlsxwriter.Workbook(output, {'in_memory': True})
@@ -62,8 +68,9 @@ class MaintenanceEquipment(models.Model):
 
         rows = []
         for line in maintenance_equipment_to_report:
+            line_name = names_dict.get(line.id, '')
             rows.append((
-                line.aux_name,
+                line_name,
                 line.x_studio_estado,
                 line.serial_no,
                 line.x_studio_ubicacin_activo.x_name,
