@@ -69,6 +69,7 @@ class MaintenanceEquipment(models.Model):
         rows = []
         for line in maintenance_equipment_to_report:
             line_name = names_dict.get(line.id, '')
+            raise UserError(str(line_name))
             rows.append((
                 line_name,
                 line.x_studio_estado,
