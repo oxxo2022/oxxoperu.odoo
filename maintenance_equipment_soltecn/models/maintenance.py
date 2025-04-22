@@ -46,7 +46,7 @@ class MaintenanceEquipment(models.Model):
         rows = []
         for line in maintenance_equipment_to_report:
             rows.append((
-                line.display_name,
+                line.name,
                 line.x_studio_estado,
                 line.serial_no,
                 line.x_studio_ubicacin_activo.x_name,
