@@ -18,14 +18,16 @@ class MaintenanceEquipment(models.Model):
     x_studio_criticidad_1= fields.Selection(string="Criticidad",
         selection=[("Crítico", "Crítico"), ("No crítico", "No crítico")])
     x_studio_sistema_operativo_1=fields.Char(string="Sistema Operativo")
+
+    aux_name = fields.Char(string="Estado nombre",compute='_compute_aux_name')
     
     def _enviar_reporte_activos(self):
         return self.send_email_custom()
 
     # @api.depends('name','serial_no')
-    # def _compute_display_name(self):
-    #     for record in self:
-    #             record.display_name = record.name    
+    def _compute_aux_name(self):
+        for record in self:
+                record.aux_name = record.name    
 
     # METODO
     @api.model
@@ -61,7 +63,7 @@ class MaintenanceEquipment(models.Model):
         rows = []
         for line in maintenance_equipment_to_report:
             rows.append((
-                line.name,
+                line.aux_name,
                 line.x_studio_estado,
                 line.serial_no,
                 line.x_studio_ubicacin_activo.x_name,
