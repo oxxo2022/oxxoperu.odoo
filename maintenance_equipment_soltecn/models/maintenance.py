@@ -22,14 +22,20 @@ class MaintenanceEquipment(models.Model):
     def _enviar_reporte_activos(self):
         return self.send_email_custom()
 
+    # @api.depends('name','serial_no')
+    # def _compute_display_name(self):
+    #     for record in self:
+    #             record.display_name = record.name    
+
     # METODO
     @api.model
     def send_email_custom(self):
         template_id = self.env['mail.template'].search([('id', '=', 13)], limit=1)
 
-        self.env['maintenance.equipment']._cr.flush()
+        self.env.cr.flush()
+
         maintenance_equipment_to_report = self.env["maintenance.equipment"].search([('x_studio_estado', '=', 'Asignado'),('x_studio_ubicacion_activo_name', 'ilike', 'TIENDA%')])
-        maintenance_equipment_to_report.invalidate_cache()
+        
         output = io.BytesIO()
         workbook = xlsxwriter.Workbook(output, {'in_memory': True})
         worksheet = workbook.add_worksheet(_("Reporte de activos - %s" % str(date.today())))
