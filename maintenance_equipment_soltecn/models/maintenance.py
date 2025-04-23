@@ -18,23 +18,44 @@ class MaintenanceEquipment(models.Model):
     x_studio_criticidad_1= fields.Selection(string="Criticidad",
         selection=[("Crítico", "Crítico"), ("No crítico", "No crítico")])
     x_studio_sistema_operativo_1=fields.Char(string="Sistema Operativo")
+
+    # aux_name = fields.Char(string="Estado nombre",compute='_compute_aux_name')
     
     def _enviar_reporte_activos(self):
         return self.send_email_custom()
+
+    # # @api.depends('name','serial_no')
+    # def _compute_aux_name(self):
+    #     for record in self:
+    #             record.aux_name = record.name    
 
     # METODO
     @api.model
     def send_email_custom(self):
         template_id = self.env['mail.template'].search([('id', '=', 13)], limit=1)
-        maintenance_equipment_to_report = self.env["maintenance.equipment"].search([('x_studio_estado', '=', 'Asignado'),('x_studio_ubicacion_activo_name', 'ilike', 'TIENDA%')])
 
+        self.env.cr.flush()
+
+        maintenance_equipment_to_report = self.env["maintenance.equipment"].browse(
+            self.env["maintenance.equipment"].search([
+                ('x_studio_estado', '=', 'Asignado'),
+                ('x_studio_ubicacion_activo_name', 'ilike', 'TIENDA%')
+            ]).ids
+        )
+
+        self.env.cr.execute("""
+            SELECT id, name FROM maintenance_equipment
+            WHERE id IN %s
+        """, (tuple(maintenance_equipment_to_report.ids),))
+        names_dict = dict(self.env.cr.fetchall())
+        
         output = io.BytesIO()
         workbook = xlsxwriter.Workbook(output, {'in_memory': True})
         worksheet = workbook.add_worksheet(_("Reporte de activos - %s" % str(date.today())))
         style_highlight = workbook.add_format({'bold': True, 'pattern': 1, 'bg_color': '#E0E0E0', 'align': 'center'})
         style_normal = workbook.add_format({'align': 'center'})
         row = 0
-
+        #s
         headers = [
             "Activo",
             "Estado",
@@ -45,12 +66,14 @@ class MaintenanceEquipment(models.Model):
 
         rows = []
         for line in maintenance_equipment_to_report:
+            line_name = names_dict.get(line.id, '').get('es_PE')
+            #raise UserError(str(line_name))
             rows.append((
-                line.display_name,
+                line_name,
                 line.x_studio_estado,
                 line.serial_no,
                 line.x_studio_ubicacin_activo.x_name,
-                line.x_studio_detalle_ubicacin_activo.x_name
+                line.x_studio_detalle_ubicacin_activo.x_name,
             ))
 
         col = 0
