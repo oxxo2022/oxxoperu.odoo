@@ -73,7 +73,7 @@ class MaintenanceEquipment(models.Model):
             rows.append((
                 line_name,
                 line.x_studio_marca,
-                line.model.name,
+                line.model,
                 line.serial_no,
                 line.x_studio_estado,
                 line.x_studio_ubicacin_activo.x_name,
@@ -187,7 +187,7 @@ class MaintenanceEquipment(models.Model):
             rows.append((
                 line_name,
                 line.x_studio_marca,
-                line.model.name,
+                line.model,
                 line.serial_no,
                 line.x_studio_estado,
                 line_last_loc_in_shop.x_name if line_last_loc_in_shop else 'NO',
