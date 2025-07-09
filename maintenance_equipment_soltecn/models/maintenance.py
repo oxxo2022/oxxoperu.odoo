@@ -176,7 +176,7 @@ class MaintenanceEquipment(models.Model):
 
             for msg in messages:
                 for track in msg.tracking_value_ids:
-                    if track.field == 'x_studio_ubicacin_activo' and int(track.old_value_integer or 0) == tienda_location.id:
+                    if track.field_id.name == 'x_studio_ubicacin_activo' and int(track.old_value_integer or 0) == tienda_location.id:
                         line_last_loc_in_shop = tienda_location
                         line_last_loc_in_shop_date = msg.create_date.strftime('%d/%m/%Y')
                         break
