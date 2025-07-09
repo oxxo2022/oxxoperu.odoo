@@ -72,7 +72,7 @@ class MaintenanceEquipment(models.Model):
             #raise UserError(str(line_name))
             rows.append((
                 line_name,
-                line.x_studio_marca.name,
+                line.x_studio_marca,
                 line.model.name,
                 line.serial_no,
                 line.x_studio_estado,
@@ -186,7 +186,7 @@ class MaintenanceEquipment(models.Model):
             #raise UserError(str(line_name))
             rows.append((
                 line_name,
-                line.x_studio_marca.name,
+                line.x_studio_marca,
                 line.model.name,
                 line.serial_no,
                 line.x_studio_estado,
