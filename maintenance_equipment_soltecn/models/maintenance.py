@@ -122,7 +122,7 @@ class MaintenanceEquipment(models.Model):
     # METODO
     @api.model
     def send_email_custom_tracking(self):
-        template_id = self.env['mail.template'].search([('id', '=', 13)], limit=1)
+        template_id = self.env['mail.template'].search([('id', '=', 36)], limit=1)
 
         self.env.cr.flush()
 
@@ -141,7 +141,7 @@ class MaintenanceEquipment(models.Model):
         
         output = io.BytesIO()
         workbook = xlsxwriter.Workbook(output, {'in_memory': True})
-        worksheet = workbook.add_worksheet(_("Reporte de activos - %s" % str(date.today())))
+        worksheet = workbook.add_worksheet(_("Reporte de activos disponibles (Tranking)  - %s" % str(date.today())))
         style_highlight = workbook.add_format({'bold': True, 'pattern': 1, 'bg_color': '#E0E0E0', 'align': 'center'})
         style_normal = workbook.add_format({'align': 'center'})
         row = 0
@@ -213,7 +213,7 @@ class MaintenanceEquipment(models.Model):
         data = output.getvalue()
 
         data_id = self.env['ir.attachment'].create({
-            'name': _("Reporte de activos - %s.xlsx" % str(date.today())),
+            'name': _("Reporte de activos disponibles (Tranking)  - %s.xlsx" % str(date.today())),
             'type': 'binary',
             'datas': base64.encodebytes(data),
             'res_model': self._name,
