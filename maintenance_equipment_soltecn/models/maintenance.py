@@ -166,7 +166,7 @@ class MaintenanceEquipment(models.Model):
             messages = self.env['mail.message'].search([
                 ('model', '=', line._name),
                 ('res_id', '=', line.id),
-                ('tracking_value_ids.field', '=', 'x_studio_ubicacin_activo'),
+                ('tracking_value_ids.field_id.name', '=', 'x_studio_ubicacin_activo'),
             ], order='create_date desc')
 
             # Iteramos buscando el último cambio DESDE una ubicación llamada "Tienda"
