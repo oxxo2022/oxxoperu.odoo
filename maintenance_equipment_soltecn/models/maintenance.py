@@ -122,7 +122,7 @@ class MaintenanceEquipment(models.Model):
     # METODO
     @api.model
     def send_email_custom_tracking(self):
-        template_id = self.env['mail.template'].search([('id', '=', 36)], limit=1)
+        template_id = self.env['mail.template'].search([('id', '=',37)], limit=1)
 
         self.env.cr.flush()
 
