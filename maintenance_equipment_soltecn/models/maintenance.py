@@ -166,7 +166,7 @@ class MaintenanceEquipment(models.Model):
             messages = self.env['mail.message'].search([
                 ('model', '=', line._name),
                 ('res_id', '=', line.id),
-                ('tracking_value_ids.field_id.name', '=', 'x_detalleubicacionacti'),
+                ('tracking_value_ids.field_id.name', '=', 'x_studio_detalle_ubicacin_activo'),
             ], order='create_date desc')
 
             # Iteramos buscando el último cambio DESDE una ubicación llamada "Tienda"
@@ -176,7 +176,7 @@ class MaintenanceEquipment(models.Model):
 
             for msg in messages:
                 for track in msg.tracking_value_ids:
-                    if track.field_id.name == 'x_detalleubicacionacti' and int(track.old_value_integer or 0) == tienda_location.id:
+                    if track.field_id.name == 'x_studio_detalle_ubicacin_activo' and int(track.old_value_integer or 0) == tienda_location.id:
                         line_last_loc_in_shop = tienda_location
                         line_last_loc_in_shop_date = msg.create_date.strftime('%d/%m/%Y')
                         break
@@ -192,7 +192,7 @@ class MaintenanceEquipment(models.Model):
                 line.x_studio_estado,
                 line_last_loc_in_shop_date or 'NO',
                 line_last_loc_in_shop.x_name if line_last_loc_in_shop else 'NO',
-                line.x_detalleubicacionacti.x_name,
+                line.x_studio_detalle_ubicacin_activo.x_name,
             ))
 
         col = 0
