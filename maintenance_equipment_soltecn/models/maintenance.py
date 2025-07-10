@@ -170,7 +170,8 @@ class MaintenanceEquipment(models.Model):
             ], order='create_date desc')
 
             # Iteramos buscando el último cambio DESDE una ubicación llamada "Tienda"
-            tienda_location = self.env['x_detalleubicacionacti'].search([('x_name', 'ilike', 'TIENDA%')], limit=1)
+            #tienda_location = self.env['x_detalleubicacionacti'].search([('x_name', 'ilike', 'TIENDA%')], limit=1)
+            tienda_location = self.env['x_detalleubicacionacti'].search([])
             line_last_loc_in_shop = False
             line_last_loc_in_shop_date = False
 
