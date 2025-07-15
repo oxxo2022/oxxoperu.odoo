@@ -171,7 +171,7 @@ class MaintenanceEquipment(models.Model):
 
             # Iteramos buscando el último cambio DESDE una ubicación llamada "Tienda"
             #tienda_location = self.env['x_detalleubicacionacti'].search([('x_name', 'ilike', 'TIENDA%')], limit=1)
-            tienda_location = self.env['x_detalleubicacionacti'].search([])
+            tienda_location = self.env['x_detalleubicacionacti'].search([('x_studio_detalle_ubicacion.x_name', 'ilike', 'TIENDA%')])
             line_last_loc_in_shop = False
             line_last_loc_in_shop_date = False
 
@@ -193,7 +193,7 @@ class MaintenanceEquipment(models.Model):
                 line.x_studio_estado,
                 line_last_loc_in_shop_date or 'NO',
                 line_last_loc_in_shop.x_name if line_last_loc_in_shop else 'NO',
-                line.x_studio_detalle_ubicacin_activo.x_name,
+                line.x_studio_detalle_ubicacin_activo.x_name or 'NO',
             ))
 
         col = 0
