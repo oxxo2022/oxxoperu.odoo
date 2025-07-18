@@ -111,6 +111,85 @@ class MaintenanceEquipment(models.Model):
 
 
 
+    @api.model
+    def send_email_disponible_custom(self):
+        template_id = self.env['mail.template'].search([('id', '=', 37)], limit=1)
+
+        self.env.cr.flush()
+
+        maintenance_equipment_to_report = self.env["maintenance.equipment"].browse(
+            self.env["maintenance.equipment"].search([
+                ('x_studio_estado', '=', 'Disponible'),
+            ]).ids
+        )
+
+        self.env.cr.execute("""
+            SELECT id, name FROM maintenance_equipment
+            WHERE id IN %s
+        """, (tuple(maintenance_equipment_to_report.ids),))
+        names_dict = dict(self.env.cr.fetchall())
+        
+        output = io.BytesIO()
+        workbook = xlsxwriter.Workbook(output, {'in_memory': True})
+        worksheet = workbook.add_worksheet(_("Reporte de activos disponibles - %s" % str(date.today())))
+        style_highlight = workbook.add_format({'bold': True, 'pattern': 1, 'bg_color': '#E0E0E0', 'align': 'center'})
+        style_normal = workbook.add_format({'align': 'center'})
+        row = 0
+        #s
+        headers = [
+            "Nombre del equipo",
+            "Marca",
+            "Modelo",
+            "N° de serie",
+            "Estado",
+            "Ubicación",
+            "Ubicación detalle",
+        ]
+
+        rows = []
+        for line in maintenance_equipment_to_report:
+            line_name = names_dict.get(line.id, '').get('es_PE')
+            #raise UserError(str(line_name))
+            rows.append((
+                line_name,
+                line.x_studio_marca,
+                line.model,
+                line.serial_no,
+                line.x_studio_estado,
+                line.x_studio_ubicacin_activo.x_name,
+                line.x_studio_detalle_ubicacin_activo.x_name,
+            ))
+
+        col = 0
+        for header in headers:
+            worksheet.write(row, col, header, style_highlight)
+            worksheet.set_column(col, col, 30)
+            col += 1
+
+        row = 1
+        for employee_row in rows:
+            col = 0
+            for employee_data in employee_row:
+                worksheet.write(row, col, employee_data, style_normal)
+                col += 1
+            row += 1
+
+        workbook.close()
+        data = output.getvalue()
+
+        data_id = self.env['ir.attachment'].create({
+            'name': _("Reporte de activos disponibles - %s.xlsx" % str(date.today())),
+            'type': 'binary',
+            'datas': base64.encodebytes(data),
+            'res_model': self._name,
+            'res_id': self.id
+        })
+
+        template_id.attachment_ids = [(6, 0, [data_id.id])]
+        self.env['mail.template'].browse(template_id.id).send_mail(self.id, force_send=True)
+        template_id.attachment_ids = [(3, data_id.id)]
+
+
     def _enviar_reporte_activos_tracking(self):
         return self.send_email_custom_tracking()
 
