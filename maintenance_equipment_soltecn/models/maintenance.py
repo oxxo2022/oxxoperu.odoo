@@ -262,6 +262,17 @@ class MaintenanceEquipment(models.Model):
                         break
                 if line_last_loc_in_shop_date:
                     break
+
+            if not line_last_loc_in_shop:
+                for msg in messages:
+                    for track in msg.tracking_value_ids:
+                        if track.field_id.name == 'x_studio_detalle_ubicacin_activo' and int(track.new_value_integer or 0) in tienda_location.ids:
+                            if track.new_value_integer != line.x_studio_detalle_ubicacin_activo.id:
+                                line_last_loc_in_shop = tienda_location.filtered(lambda x: x.id == int(track.new_value_integer))
+                                line_last_loc_in_shop_date = msg.create_date.strftime('%d/%m/%Y')
+                                break
+                    if line_last_loc_in_shop_date:
+                        break
             
             #raise UserError(str(line_name))
             rows.append((
