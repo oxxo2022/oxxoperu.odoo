@@ -470,3 +470,143 @@ class MaintenanceEquipment(models.Model):
         template_id.attachment_ids = [(6, 0, [data_id.id])]
         self.env['mail.template'].browse(template_id.id).send_mail(self.id, force_send=True)
         template_id.attachment_ids = [(3, data_id.id)]
+
+    @api.model
+    def send_email_custom_tracking(self):
+        template_id = self.env['mail.template'].browse(36)
+
+        # 🔹 Flush para asegurar consistencia
+        self.env.cr.flush()
+
+        # 🔹 Obtener equipos directamente (sin browse innecesario)
+        equipments = self.env["maintenance.equipment"].search([
+            ('x_studio_estado', 'in', ['Disponible', 'Asignado', 'Baja']),
+        ])
+
+        # 🔹 Obtener ubicaciones UNA SOLA VEZ
+        tienda_location = self.env['x_detalleubicacionacti'].search([])
+        tienda_location_ids = set(tienda_location.ids)
+
+        tienda_main_location = self.env['x_ubicacionactivo'].search([])
+        tienda_main_location_ids = set(tienda_main_location.ids)
+
+        # 🔹 Obtener TODOS los mensajes en una sola query
+        messages = self.env['mail.message'].search([
+            ('model', '=', 'maintenance.equipment'),
+            ('res_id', 'in', equipments.ids),
+            ('tracking_value_ids.field_id.name', 'in', [
+                'x_studio_detalle_ubicacin_activo',
+                'x_studio_ubicacin_activo'
+            ])
+        ], order='create_date desc')
+
+        # 🔹 Agrupar mensajes por res_id (equipo)
+        messages_by_equipment = {}
+        for msg in messages:
+            messages_by_equipment.setdefault(msg.res_id, []).append(msg)
+
+        # 🔹 Función helper reutilizable
+        def get_last_location(messages, field_name, valid_ids, current_id):
+            """
+            Busca la última ubicación basada en tracking.
+            """
+            for msg in messages:
+                for track in msg.tracking_value_ids:
+                    if track.field_id.name != field_name:
+                        continue
+
+                    old_val = int(track.old_value_integer or 0)
+                    new_val = int(track.new_value_integer or 0)
+
+                    # 🔹 Caso 1: old_value válido
+                    if old_val in valid_ids:
+                        return old_val, msg.create_date.strftime('%d/%m/%Y')
+
+                    # 🔹 Caso 2: new_value válido pero distinto al actual
+                    if new_val in valid_ids and new_val != current_id:
+                        return new_val, msg.create_date.strftime('%d/%m/%Y')
+
+            return False, False
+
+        # 🔹 Excel
+        output = io.BytesIO()
+        workbook = xlsxwriter.Workbook(output, {'in_memory': True})
+        worksheet = workbook.add_worksheet(
+            _("Reporte de activos disponibles (Tracking) - %s" % str(date.today()))
+        )
+
+        style_highlight = workbook.add_format({
+            'bold': True, 'pattern': 1, 'bg_color': '#E0E0E0', 'align': 'center'
+        })
+        style_normal = workbook.add_format({'align': 'center'})
+
+        headers = [
+            "Nombre del equipo",
+            "Marca / Modelo",
+            "N° de serie",
+            "Estado",
+            "Fecha Últ. Movimiento",
+            "Ultima ubicación",
+            "Detalle Últ. Ubicación",
+            "Ubicación Actual",
+            "Detalle Ubicación Actual",
+        ]
+
+        # 🔹 Escribir headers
+        for col, header in enumerate(headers):
+            worksheet.write(0, col, header, style_highlight)
+            worksheet.set_column(col, col, 30)
+
+        # 🔹 Procesar filas
+        row = 1
+        for eq in equipments:
+            eq_messages = messages_by_equipment.get(eq.id, [])
+
+            # 🔹 Obtener tracking optimizado
+            last_detail_id, last_detail_date = get_last_location(
+                eq_messages,
+                'x_studio_detalle_ubicacin_activo',
+                tienda_location_ids,
+                eq.x_studio_detalle_ubicacin_activo.id
+            )
+
+            last_main_id, last_main_date = get_last_location(
+                eq_messages,
+                'x_studio_ubicacin_activo',
+                tienda_main_location_ids,
+                eq.x_studio_ubicacin_activo.id
+            )
+
+            # 🔹 Obtener nombres sin filtered (más rápido)
+            last_detail = tienda_location.browse(last_detail_id) if last_detail_id else False
+            last_main = tienda_main_location.browse(last_main_id) if last_main_id else False
+
+            worksheet.write_row(row, 0, [
+                eq.with_context(lang='es_PE').name,
+                "%s / %s" % (eq.x_studio_marca, eq.model) if eq.model else eq.x_studio_marca,
+                eq.serial_no,
+                eq.x_studio_estado,
+                last_detail_date or 'NO',
+                last_main.x_name if last_main else 'NO',
+                last_detail.x_name if last_detail else 'NO',
+                eq.x_studio_ubicacin_activo.x_name or 'NO',
+                eq.x_studio_detalle_ubicacin_activo.x_name or 'NO',
+            ], style_normal)
+
+            row += 1
+
+        workbook.close()
+        data = output.getvalue()
+
+        # 🔹 Adjuntar archivo
+        attachment = self.env['ir.attachment'].create({
+            'name': _("Reporte de activos disponibles (Tracking) - %s.xlsx" % str(date.today())),
+            'type': 'binary',
+            'datas': base64.encodebytes(data),
+            'res_model': self._name,
+            'res_id': self.id
+        })
+
+        template_id.attachment_ids = [(6, 0, [attachment.id])]
+        template_id.send_mail(self.id, force_send=True)
+        template_id.attachment_ids = [(3, attachment.id)]
