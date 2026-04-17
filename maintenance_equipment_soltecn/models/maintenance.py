@@ -364,16 +364,18 @@ class MaintenanceEquipment(models.Model):
                     old_val = int(track.old_value_integer or 0)
                     new_val = int(track.new_value_integer or 0)
 
+                    # Convertir fecha a zona horaria del usuario
+                    local_date = fields.Datetime.context_timestamp(msg, msg.create_date)
+
                     # 🔹 Caso 1: old_value válido
                     if old_val in valid_ids:
-                        return old_val, msg.create_date.strftime('%d/%m/%Y')
+                        return old_val, local_date.strftime('%d/%m/%Y')
 
                     # 🔹 Caso 2: new_value válido pero distinto al actual
                     if new_val in valid_ids and new_val != current_id:
-                        return new_val, msg.create_date.strftime('%d/%m/%Y')
+                        return new_val, local_date.strftime('%d/%m/%Y')
 
             return False, False
-
         # 🔹 Excel
         output = io.BytesIO()
         workbook = xlsxwriter.Workbook(output, {'in_memory': True})
