@@ -458,3 +458,9 @@ class MaintenanceEquipment(models.Model):
         template_id.attachment_ids = [(6, 0, [attachment.id])]
         template_id.send_mail(self.id, force_send=True)
         template_id.attachment_ids = [(3, attachment.id)]
+
+    def _compute_field_value(self, field):
+        if self._name == 'maintenance.equipment':
+            self = self.with_context(tracking_disable=False)
+
+        return super()._compute_field_value(field)
