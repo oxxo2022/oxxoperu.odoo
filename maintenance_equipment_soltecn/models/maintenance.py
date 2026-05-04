@@ -398,6 +398,7 @@ class MaintenanceEquipment(models.Model):
             "Detalle Últ. Ubicación",
             "Ubicación Actual",
             "Detalle Ubicación Actual",
+            "Numero de activo",
         ]
 
         # 🔹 Escribir headers
@@ -439,6 +440,7 @@ class MaintenanceEquipment(models.Model):
                 last_detail.x_name if last_detail else 'NO',
                 eq.x_studio_ubicacin_activo.x_name or 'NO',
                 eq.x_studio_detalle_ubicacin_activo.x_name or 'NO',
+                eq.x_studio_nmero_de_activo_1 or "NO",
             ], style_normal)
 
             row += 1
