@@ -430,6 +430,9 @@ class MaintenanceEquipment(models.Model):
             last_detail = tienda_location.browse(last_detail_id) if last_detail_id else False
             last_main = tienda_main_location.browse(last_main_id) if last_main_id else False
 
+            if not last_main and last_detail:
+                last_main = last_detail.x_studio_ubicacion
+
             worksheet.write_row(row, 0, [
                 eq.with_context(lang='es_PE').name,
                 "%s / %s" % (eq.x_studio_marca, eq.model) if eq.model else eq.x_studio_marca,
@@ -440,7 +443,7 @@ class MaintenanceEquipment(models.Model):
                 last_detail.x_name if last_detail else 'NO',
                 eq.x_studio_ubicacin_activo.x_name or 'NO',
                 eq.x_studio_detalle_ubicacin_activo.x_name or 'NO',
-                eq.x_studio_nmero_de_activo_1 or "NO",
+                eq.x_studio_nmero_de_activo_1 or "",
             ], style_normal)
 
             row += 1
