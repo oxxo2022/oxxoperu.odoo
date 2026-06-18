@@ -433,6 +433,19 @@ class MaintenanceEquipment(models.Model):
             if not last_main and last_detail:
                 last_main = last_detail.x_studio_ubicacion
 
+            if not last_detail:
+                last_detail = eq.x_studio_detalle_ubicacin_activo
+
+            if not last_main:
+                last_main = eq.x_studio_ubicacin_activo
+            
+            if not last_detail_date:
+                if eq.create_date:
+                    local_creation = fields.Datetime.context_timestamp(eq, eq.create_date)
+                    last_detail_date = local_creation.strftime('%d/%m/%Y')
+                else:
+                    last_detail_date = 'NO'
+
             worksheet.write_row(row, 0, [
                 eq.with_context(lang='es_PE').name,
                 "%s / %s" % (eq.x_studio_marca, eq.model) if eq.model else eq.x_studio_marca,
@@ -443,7 +456,7 @@ class MaintenanceEquipment(models.Model):
                 last_detail.x_name if last_detail else 'NO',
                 eq.x_studio_ubicacin_activo.x_name or 'NO',
                 eq.x_studio_detalle_ubicacin_activo.x_name or 'NO',
-                eq.x_studio_nmero_de_activo_1 or "",
+                eq.x_studio_nmero_de_activo or "",
             ], style_normal)
 
             row += 1
