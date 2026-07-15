@@ -369,11 +369,11 @@ class MaintenanceEquipment(models.Model):
 
                     # 🔹 Caso 1: old_value válido
                     if old_val in valid_ids:
-                        return old_val, local_date.strftime('%d/%m/%Y')
+                        return old_val, local_date.strftime('%d/%m/%Y'), track.old_value_char
 
                     # 🔹 Caso 2: new_value válido pero distinto al actual
                     if new_val in valid_ids and new_val != current_id:
-                        return new_val, local_date.strftime('%d/%m/%Y')
+                        return new_val, local_date.strftime('%d/%m/%Y'), track.new_value_char
 
             return False, False
         # 🔹 Excel
@@ -412,14 +412,14 @@ class MaintenanceEquipment(models.Model):
             eq_messages = messages_by_equipment.get(eq.id, [])
 
             # 🔹 Obtener tracking optimizado
-            last_detail_id, last_detail_date = get_last_location(
+            last_detail_id, last_detail_date , last_detail_char = get_last_location(
                 eq_messages,
                 'x_studio_detalle_ubicacin_activo',
                 tienda_location_ids,
                 eq.x_studio_detalle_ubicacin_activo.id
             )
 
-            last_main_id, last_main_date = get_last_location(
+            last_main_id, last_main_date, last_main_char = get_last_location(
                 eq_messages,
                 'x_studio_ubicacin_activo',
                 tienda_main_location_ids,
@@ -428,7 +428,12 @@ class MaintenanceEquipment(models.Model):
 
             # 🔹 Obtener nombres sin filtered (más rápido)
             last_detail = tienda_location.browse(last_detail_id) if last_detail_id else False
+            if not last_detail and last_detail_char:
+                last_detail = tienda_location.filtered(lambda l: l.x_name == last_detail_char)[:1]
+
             last_main = tienda_main_location.browse(last_main_id) if last_main_id else False
+            if not last_main and last_main_char:
+                last_main = tienda_main_location.filtered(lambda l: l.x_name == last_main_char)[:1]
 
             if not last_main and last_detail:
                 last_main = last_detail.x_studio_ubicacion
