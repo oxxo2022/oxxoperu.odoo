@@ -368,11 +368,11 @@ class MaintenanceEquipment(models.Model):
                     local_date = fields.Datetime.context_timestamp(msg, msg.create_date)
 
                     # 🔹 Caso 1: old_value válido
-                    if old_val in valid_ids:
+                    if old_val:
                         return old_val, local_date.strftime('%d/%m/%Y'), track.old_value_char
 
                     # 🔹 Caso 2: new_value válido pero distinto al actual
-                    if new_val in valid_ids and new_val != current_id:
+                    if new_val and new_val != current_id:
                         return new_val, local_date.strftime('%d/%m/%Y'), track.new_value_char
 
             return False, False, False
