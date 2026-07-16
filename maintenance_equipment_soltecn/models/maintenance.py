@@ -427,11 +427,11 @@ class MaintenanceEquipment(models.Model):
             )
 
             # 🔹 Obtener nombres sin filtered (más rápido)
-            last_detail = tienda_location.browse(last_detail_id) if last_detail_id else False
+            last_detail = tienda_location.browse(last_detail_id).exists() if last_detail_id else False
             if not last_detail and last_detail_char:
                 last_detail = tienda_location.filtered(lambda l: l.x_name == last_detail_char)[:1]
 
-            last_main = tienda_main_location.browse(last_main_id) if last_main_id else False
+            last_main = tienda_main_location.browse(last_main_id).exists() if last_main_id else False
             if not last_main and last_main_char:
                 last_main = tienda_main_location.filtered(lambda l: l.x_name == last_main_char)[:1]
 
