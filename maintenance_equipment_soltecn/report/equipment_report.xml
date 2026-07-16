@@ -91,7 +91,7 @@
                                         <span>UBICACIÓN</span>
                                     </th>
                                     <th>
-                                        <span>DETALLE DE UBICACIÓN</span>
+                                        <span>DETELLE UBICACIÓN</span>
                                     </th>
                                 </tr>
                             </thead>
@@ -198,7 +198,7 @@
                                         <span>UBICACIÓN</span>
                                     </th>
                                     <th>
-                                        <span>DETALLE DE UBICACIÓN</span>
+                                        <span>DETELLE UBICACIÓN</span>
                                     </th>
                                 </tr>
                             </thead>
@@ -255,11 +255,6 @@
                                 </div>
                             </div>
                             <br/>
-                            <div class="row mb-2" style="font-weight: bold; font-size: 0.95rem">
-                                <div class="col-12">
-                                    Observación : ____________________________________________________________________________________
-                                </div>
-                            </div>
                             <br/>
                             <div class="row mb-2" style="font-weight: bold; font-size: 0.95rem">
                                 <div class="col-6">
@@ -310,7 +305,7 @@
                                         <span>UBICACIÓN</span>
                                     </th>
                                     <th>
-                                        <span>DETALLE DE UBICACIÓN</span>
+                                        <span>DETELLE UBICACIÓN</span>
                                     </th>
                                 </tr>
                             </thead>
@@ -367,11 +362,6 @@
                                 </div>
                             </div>
                             <br/>
-                            <div class="row mb-2" style="font-weight: bold; font-size: 0.95rem">
-                                <div class="col-12">
-                                    Observación : ____________________________________________________________________________________
-                                </div>
-                            </div>
                             <br/>
                             <div class="row mb-2" style="font-weight: bold; font-size: 0.95rem">
                                 <div class="col-6">
@@ -422,7 +412,7 @@
                                         <span>UBICACIÓN</span>
                                     </th>
                                     <th>
-                                        <span>DETALLE DE UBICACIÓN</span>
+                                        <span>DETELLE UBICACIÓN</span>
                                     </th>
                                 </tr>
                             </thead>
@@ -479,11 +469,6 @@
                                 </div>
                             </div>
                             <br/>
-                            <div class="row mb-2" style="font-weight: bold; font-size: 0.95rem">
-                                <div class="col-12">
-                                    Observación : ____________________________________________________________________________________
-                                </div>
-                            </div>
                             <br/>
                             <div class="row mb-2" style="font-weight: bold; font-size: 0.95rem">
                                 <div class="col-6">
@@ -534,7 +519,7 @@
                                         <span>UBICACIÓN</span>
                                     </th>
                                     <th>
-                                        <span>DETALLE DE UBICACIÓN</span>
+                                        <span>DETELLE UBICACIÓN</span>
                                     </th>
                                 </tr>
                             </thead>
@@ -591,11 +576,6 @@
                                 </div>
                             </div>
                             <br/>
-                            <div class="row mb-2" style="font-weight: bold; font-size: 0.95rem">
-                                <div class="col-12">
-                                    Observación : ____________________________________________________________________________________
-                                </div>
-                            </div>
                             <br/>
                             <div class="row mb-2" style="font-weight: bold; font-size: 0.95rem">
                                 <div class="col-6">
@@ -646,7 +626,7 @@
                                         <span>UBICACIÓN</span>
                                     </th>
                                     <th>
-                                        <span>DETALLE DE UBICACIÓN</span>
+                                        <span>DETELLE UBICACIÓN</span>
                                     </th>
                                 </tr>
                             </thead>
@@ -703,11 +683,6 @@
                                 </div>
                             </div>
                             <br/>
-                            <div class="row mb-2" style="font-weight: bold; font-size: 0.95rem">
-                                <div class="col-12">
-                                    Observación : ____________________________________________________________________________________
-                                </div>
-                            </div>
                             <br/>
                             <div class="row mb-2" style="font-weight: bold; font-size: 0.95rem">
                                 <div class="col-6">
