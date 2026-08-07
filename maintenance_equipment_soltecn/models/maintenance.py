@@ -273,7 +273,7 @@ class MaintenanceEquipment(models.Model):
                                 break
                     if line_last_loc_in_shop_date:
                         break
-
+            
             #raise UserError(str(line_name))
             rows.append((
                 line_name,
@@ -367,13 +367,15 @@ class MaintenanceEquipment(models.Model):
                     # Convertir fecha a zona horaria del usuario
                     local_date = fields.Datetime.context_timestamp(msg, msg.create_date)
 
+                    # 🔹 Caso 2: new_value válido pero distinto al actual
+                    if new_val and new_val != current_id:
+                        return new_val, local_date.strftime('%d/%m/%Y'), track.new_value_char
+                    
                     # 🔹 Caso 1: old_value válido
                     if old_val:
                         return old_val, local_date.strftime('%d/%m/%Y'), track.old_value_char
 
-                    # 🔹 Caso 2: new_value válido pero distinto al actual
-                    if new_val and new_val != current_id:
-                        return new_val, local_date.strftime('%d/%m/%Y'), track.new_value_char
+
 
             return False, False, False
         # 🔹 Excel
@@ -443,7 +445,7 @@ class MaintenanceEquipment(models.Model):
 
             if not last_main:
                 last_main = eq.x_studio_ubicacin_activo
-
+            
             if not last_detail_date:
                 if eq.create_date:
                     local_creation = fields.Datetime.context_timestamp(eq, eq.create_date)
