@@ -451,19 +451,19 @@ class MaintenanceEquipment(models.Model):
                     local_creation = fields.Datetime.context_timestamp(eq, eq.create_date)
                     last_detail_date = local_creation.strftime('%d/%m/%Y')
                 else:
-                    last_detail_date = 'NO'
+                    last_detail_date = ''
 
             worksheet.write_row(row, 0, [
                 eq.with_context(lang='es_PE').name,
                 "%s / %s" % (eq.x_studio_marca, eq.model) if eq.model else eq.x_studio_marca,
                 eq.serial_no,
                 eq.x_studio_estado,
-                last_detail_date or 'NO',
-                last_main.x_name if last_main else 'NO',
-                last_detail.x_name if last_detail else 'NO',
-                eq.x_studio_ubicacin_activo.x_name or 'NO',
-                eq.x_studio_detalle_ubicacin_activo.x_name or 'NO',
-                eq.x_studio_nmero_de_activo or "",
+                last_detail_date or '',
+                last_main.x_name if last_main else '',
+                last_detail.x_name if last_detail else '',
+                eq.x_studio_ubicacin_activo.x_name or '',
+                eq.x_studio_detalle_ubicacin_activo.x_name or '',
+                eq.x_studio_nmero_de_activo or '',
             ], style_normal)
 
             row += 1
